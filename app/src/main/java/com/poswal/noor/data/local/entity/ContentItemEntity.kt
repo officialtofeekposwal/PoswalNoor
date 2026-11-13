@@ -18,6 +18,7 @@ data class ContentItemEntity(
     @ColumnInfo(name = "type") val type: String, // "quran" | "hadith"
     @ColumnInfo(name = "arabic") val arabic: String,
     @ColumnInfo(name = "translation_en") val translationEn: String,
+    @ColumnInfo(name = "translation_hinglish") val translationHinglish: String? = null,
     @ColumnInfo(name = "translation_hi") val translationHi: String? = null,
     @ColumnInfo(name = "translation_ur") val translationUr: String? = null,
     @ColumnInfo(name = "reference") val reference: String,

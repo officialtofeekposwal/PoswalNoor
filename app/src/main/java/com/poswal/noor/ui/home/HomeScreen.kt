@@ -1,5 +1,6 @@
 package com.poswal.noor.ui.home
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -31,23 +32,20 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -63,11 +61,13 @@ import com.poswal.noor.domain.model.isFallbackTranslation
 import com.poswal.noor.domain.model.translationFor
 import com.poswal.noor.ui.theme.ArabicQuranTextStyle
 import com.poswal.noor.ui.theme.HeadingFontFamily
+import com.poswal.noor.ui.theme.NoorEmerald
+import com.poswal.noor.ui.theme.NoorEmeraldDeep
 import com.poswal.noor.ui.theme.NoorGold
+import com.poswal.noor.ui.theme.NoorIvory
 import com.poswal.noor.ui.theme.UrduTranslationTextStyle
 import com.poswal.noor.util.WidgetPinHelper
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
@@ -78,47 +78,6 @@ fun HomeScreen(
     val context = LocalContext.current
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_noor_mark),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(28.dp)
-                        )
-                        Spacer(modifier = Modifier.width(10.dp))
-                        Text(
-                            text = "Poswal Noor",
-                            fontFamily = HeadingFontFamily,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { WidgetPinHelper.pinWidget(context) }) {
-                        Icon(
-                            imageVector = Icons.Default.Widgets,
-                            contentDescription = stringResource(id = R.string.action_add_widget_to_home),
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                    IconButton(onClick = onNavigateToSettings) {
-                        Icon(
-                            imageVector = Icons.Default.Settings,
-                            contentDescription = stringResource(id = R.string.action_settings),
-                            tint = MaterialTheme.colorScheme.onBackground
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
-                )
-            )
-        },
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
         Column(
@@ -126,46 +85,172 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp)
+                .padding(horizontal = 18.dp, vertical = 12.dp)
         ) {
-            // Content Type Tabs (Both, Quran, Hadith)
-            val tabs = listOf(
-                ContentType.BOTH to stringResource(id = R.string.label_both),
-                ContentType.QURAN to stringResource(id = R.string.label_quran),
-                ContentType.HADITH to stringResource(id = R.string.label_hadith)
-            )
-            val selectedTabIndex = tabs.indexOfFirst { it.first == uiState.selectedContentType }
-
-            TabRow(
-                selectedTabIndex = if (selectedTabIndex >= 0) selectedTabIndex else 0,
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                contentColor = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.clip(RoundedCornerShape(12.dp))
+            // ==========================================
+            // 🌟 ELEGANT CUSTOM TOP HEADER BAR
+            // ==========================================
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                tabs.forEachIndexed { index, pair ->
-                    Tab(
-                        selected = selectedTabIndex == index,
-                        onClick = { viewModel.selectContentType(pair.first) },
-                        text = {
+                // Left: Brand Logo + Typography
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(42.dp)
+                            .clip(CircleShape)
+                            .background(NoorEmerald)
+                            .border(1.5.dp, NoorGold, CircleShape),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_noor_mark),
+                            contentDescription = null,
+                            tint = NoorIvory,
+                            modifier = Modifier.size(26.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(12.dp))
+
+                    Column {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = pair.second,
-                                fontWeight = if (selectedTabIndex == index) FontWeight.Bold else FontWeight.Normal
+                                text = "Poswal Noor",
+                                fontFamily = HeadingFontFamily,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 21.sp,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "نور",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = NoorGold
                             )
                         }
+                        Text(
+                            text = "Daily Quran & Hadith",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.65f),
+                            letterSpacing = 0.5.sp
+                        )
+                    }
+                }
+
+                // Right: 1-Tap Widget Pill + Settings Button
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // Sleek Widget Pill
+                    Row(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(20.dp))
+                            .background(NoorEmerald.copy(alpha = 0.09f))
+                            .border(1.dp, NoorGold.copy(alpha = 0.5f), RoundedCornerShape(20.dp))
+                            .clickable { WidgetPinHelper.pinWidget(context) }
+                            .padding(horizontal = 10.dp, vertical = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Widgets,
+                            contentDescription = null,
+                            tint = NoorEmerald,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(
+                            text = "+ Widget",
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = NoorEmerald
+                        )
+                    }
+
+                    // Settings Button
+                    IconButton(
+                        onClick = onNavigateToSettings,
+                        modifier = Modifier
+                            .size(38.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f))
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = stringResource(id = R.string.action_settings),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(18.dp))
+
+            // ==========================================
+            // 🎯 SLEEK SEGMENTED CONTROL (ALL / QURAN / HADITH)
+            // ==========================================
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.65f))
+                    .padding(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                val segments = listOf(
+                    ContentType.BOTH to stringResource(id = R.string.label_both),
+                    ContentType.QURAN to stringResource(id = R.string.label_quran),
+                    ContentType.HADITH to stringResource(id = R.string.label_hadith)
+                )
+
+                segments.forEach { (type, label) ->
+                    val isSelected = uiState.selectedContentType == type
+                    val bgColor by animateColorAsState(
+                        if (isSelected) NoorEmerald else Color.Transparent,
+                        label = "segmentBg"
                     )
+                    val textColor by animateColorAsState(
+                        if (isSelected) NoorIvory else MaterialTheme.colorScheme.onSurfaceVariant,
+                        label = "segmentText"
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(38.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(bgColor)
+                            .clickable { viewModel.selectContentType(type) },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = label,
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                            color = textColor
+                        )
+                    }
                 }
             }
 
             Spacer(modifier = Modifier.height(14.dp))
 
-            // Topics Filter Chips
+            // ==========================================
+            // 🏷️ TOPIC FILTER CHIPS (HORIZONTAL SCROLL)
+            // ==========================================
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // "All Topics" Chip
                 TopicChip(
                     label = stringResource(id = R.string.label_all_topics),
                     isSelected = uiState.selectedTopicKey == null,
@@ -194,7 +279,9 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Main Ayah / Hadith Card
+            // ==========================================
+            // 📖 MAIN DAILY REFLECTION CARD
+            // ==========================================
             if (uiState.isLoading) {
                 Box(
                     modifier = Modifier
@@ -202,7 +289,7 @@ fun HomeScreen(
                         .height(280.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                    CircularProgressIndicator(color = NoorEmerald)
                 }
             } else {
                 val item = uiState.currentItem
@@ -210,23 +297,23 @@ fun HomeScreen(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(16.dp))
+                            .shadow(4.dp, RoundedCornerShape(20.dp), spotColor = NoorEmerald.copy(alpha = 0.15f))
+                            .clip(RoundedCornerShape(20.dp))
                             .border(
                                 width = 1.dp,
-                                color = NoorGold.copy(alpha = 0.4f),
-                                shape = RoundedCornerShape(16.dp)
+                                color = NoorGold.copy(alpha = 0.45f),
+                                shape = RoundedCornerShape(20.dp)
                             ),
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surface
-                        ),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                        )
                     ) {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(20.dp)
+                                .padding(22.dp)
                         ) {
-                            // Header Row: Type Badge + Grade + Favorite Button
+                            // Top Row: Badges & Favorite
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -241,11 +328,11 @@ fun HomeScreen(
                                         text = item.type.uppercase(),
                                         style = MaterialTheme.typography.labelSmall,
                                         fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.primary,
+                                        color = NoorEmerald,
                                         modifier = Modifier
-                                            .clip(RoundedCornerShape(4.dp))
-                                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f))
-                                            .padding(horizontal = 8.dp, vertical = 4.dp)
+                                            .clip(RoundedCornerShape(6.dp))
+                                            .background(NoorEmerald.copy(alpha = 0.12f))
+                                            .padding(horizontal = 9.dp, vertical = 4.dp)
                                     )
 
                                     // Grade badge
@@ -253,12 +340,12 @@ fun HomeScreen(
                                         Text(
                                             text = item.grade,
                                             style = MaterialTheme.typography.labelSmall,
-                                            fontWeight = FontWeight.Medium,
+                                            fontWeight = FontWeight.SemiBold,
                                             color = NoorGold,
                                             modifier = Modifier
-                                                .clip(RoundedCornerShape(4.dp))
+                                                .clip(RoundedCornerShape(6.dp))
                                                 .background(NoorGold.copy(alpha = 0.15f))
-                                                .padding(horizontal = 6.dp, vertical = 4.dp)
+                                                .padding(horizontal = 8.dp, vertical = 4.dp)
                                         )
                                     }
                                 }
@@ -270,12 +357,12 @@ fun HomeScreen(
                                     Icon(
                                         imageVector = if (item.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                                         contentDescription = "Favorite",
-                                        tint = if (item.isFavorite) NoorGold else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                                        tint = if (item.isFavorite) NoorGold else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f)
                                     )
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(18.dp))
 
                             // Arabic Quran / Hadith Text (Amiri font)
                             Text(
@@ -285,10 +372,10 @@ fun HomeScreen(
                                 color = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 8.dp)
+                                    .padding(horizontal = 6.dp)
                             )
 
-                            // Translation (if language is not Arabic)
+                            // Translation Text
                             val translation = item.translationFor(uiState.language)
                             if (!translation.isNullOrEmpty()) {
                                 Spacer(modifier = Modifier.height(16.dp))
@@ -298,10 +385,10 @@ fun HomeScreen(
                                     Text(
                                         text = stringResource(id = R.string.badge_english_fallback),
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.primary,
+                                        color = NoorEmerald,
                                         modifier = Modifier
                                             .clip(RoundedCornerShape(4.dp))
-                                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.08f))
+                                            .background(NoorEmerald.copy(alpha = 0.08f))
                                             .padding(horizontal = 6.dp, vertical = 2.dp)
                                     )
                                     Spacer(modifier = Modifier.height(6.dp))
@@ -316,28 +403,28 @@ fun HomeScreen(
                                 )
                             }
 
-                            Spacer(modifier = Modifier.height(14.dp))
+                            Spacer(modifier = Modifier.height(16.dp))
 
-                            // Reference in Bold
+                            // Reference in Bold Gold/Emerald
                             Text(
                                 text = item.reference,
                                 style = MaterialTheme.typography.labelLarge,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.primary,
+                                color = NoorEmerald,
                                 modifier = Modifier.align(if (uiState.language.isRtl) Alignment.Start else Alignment.End)
                             )
 
                             Spacer(modifier = Modifier.height(20.dp))
 
-                            // Actions: Refresh + Read More
+                            // Action Buttons (Refresh + Read more)
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(10.dp)
                             ) {
                                 OutlinedButton(
                                     onClick = { viewModel.refreshRandomItem() },
-                                    modifier = Modifier.weight(1f),
-                                    shape = RoundedCornerShape(10.dp)
+                                    modifier = Modifier.weight(1f).height(44.dp),
+                                    shape = RoundedCornerShape(12.dp)
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Refresh,
@@ -350,11 +437,11 @@ fun HomeScreen(
 
                                 Button(
                                     onClick = { onNavigateToDetail(item.id) },
-                                    modifier = Modifier.weight(1f),
-                                    shape = RoundedCornerShape(10.dp),
+                                    modifier = Modifier.weight(1f).height(44.dp),
+                                    shape = RoundedCornerShape(12.dp),
                                     colors = ButtonDefaults.buttonColors(
-                                        containerColor = MaterialTheme.colorScheme.primary,
-                                        contentColor = MaterialTheme.colorScheme.onPrimary
+                                        containerColor = NoorEmerald,
+                                        contentColor = NoorIvory
                                     )
                                 ) {
                                     Text(
@@ -370,14 +457,16 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Add Widget to Home Screen Banner Card
+            // ==========================================
+            // 📱 ADD WIDGET BANNER
+            // ==========================================
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp))
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                        color = NoorGold.copy(alpha = 0.35f),
                         shape = RoundedCornerShape(16.dp)
                     )
                     .clickable { WidgetPinHelper.pinWidget(context) },
@@ -395,13 +484,13 @@ fun HomeScreen(
                         modifier = Modifier
                             .size(44.dp)
                             .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)),
+                            .background(NoorEmerald.copy(alpha = 0.12f)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             imageVector = Icons.Default.Widgets,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = NoorEmerald,
                             modifier = Modifier.size(24.dp)
                         )
                     }
@@ -429,14 +518,14 @@ fun HomeScreen(
                         shape = RoundedCornerShape(10.dp),
                         contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            contentColor = MaterialTheme.colorScheme.onPrimary
+                            containerColor = NoorEmerald,
+                            contentColor = NoorIvory
                         )
                     ) {
                         Text(
-                            text = "+",
+                            text = "+ Add",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 18.sp
+                            fontSize = 14.sp
                         )
                     }
                 }
@@ -451,20 +540,32 @@ fun TopicChip(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
+    val bgColor by animateColorAsState(
+        if (isSelected) NoorEmerald else MaterialTheme.colorScheme.surfaceVariant,
+        label = "chipBg"
+    )
+    val textColor by animateColorAsState(
+        if (isSelected) NoorIvory else MaterialTheme.colorScheme.onSurfaceVariant,
+        label = "chipText"
+    )
+
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(20.dp))
-            .background(
-                if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant
+            .background(bgColor)
+            .border(
+                1.dp,
+                if (isSelected) NoorGold.copy(alpha = 0.6f) else Color.Transparent,
+                RoundedCornerShape(20.dp)
             )
             .clickable(onClick = onClick)
-            .padding(horizontal = 14.dp, vertical = 8.dp)
+            .padding(horizontal = 14.dp, vertical = 7.dp)
     ) {
         Text(
             text = label,
             style = MaterialTheme.typography.labelMedium,
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-            color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+            color = textColor
         )
     }
 }

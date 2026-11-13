@@ -55,6 +55,12 @@ class AppLanguageTest {
         )
         // Arabic selected: NO translation line shown
         assertNull(sampleItemWithTranslations.translationFor(AppLanguage.ARABIC))
+
+        // Hinglish translation
+        assertEquals(
+            "Indeed, with hardship [will be] ease.",
+            sampleItemWithTranslations.translationFor(AppLanguage.HINGLISH)
+        )
     }
 
     @Test

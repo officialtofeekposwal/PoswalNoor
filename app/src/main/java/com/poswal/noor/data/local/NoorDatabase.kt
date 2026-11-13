@@ -7,7 +7,7 @@ import com.poswal.noor.data.local.entity.ContentItemEntity
 
 @Database(
     entities = [ContentItemEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class NoorDatabase : RoomDatabase() {

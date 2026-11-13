@@ -4,6 +4,7 @@ import com.poswal.noor.data.local.entity.ContentItemEntity
 
 enum class AppLanguage(val tag: String, val nativeName: String, val isRtl: Boolean) {
     ENGLISH("en", "English", false),
+    HINGLISH("en-IN", "Hinglish (Roman)", false),
     HINDI("hi", "हिन्दी", false),
     URDU("ur", "اردو", true),
     ARABIC("ar", "العربية", true);
@@ -16,14 +17,16 @@ enum class AppLanguage(val tag: String, val nativeName: String, val isRtl: Boole
 }
 
 fun ContentItemEntity.translationFor(lang: AppLanguage): String? = when (lang) {
-    AppLanguage.ENGLISH -> translationEn
-    AppLanguage.HINDI   -> translationHi ?: translationEn
-    AppLanguage.URDU    -> translationUr ?: translationEn
-    AppLanguage.ARABIC  -> null
+    AppLanguage.ENGLISH  -> translationEn
+    AppLanguage.HINGLISH -> translationHinglish ?: translationEn
+    AppLanguage.HINDI    -> translationHi ?: translationEn
+    AppLanguage.URDU     -> translationUr ?: translationEn
+    AppLanguage.ARABIC   -> null
 }
 
 fun ContentItemEntity.isFallbackTranslation(lang: AppLanguage): Boolean = when (lang) {
-    AppLanguage.HINDI -> translationHi == null
-    AppLanguage.URDU  -> translationUr == null
+    AppLanguage.HINGLISH -> translationHinglish == null
+    AppLanguage.HINDI    -> translationHi == null
+    AppLanguage.URDU     -> translationUr == null
     else -> false
 }
