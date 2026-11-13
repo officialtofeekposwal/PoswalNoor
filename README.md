@@ -11,9 +11,10 @@
 [![Android](https://img.shields.io/badge/Platform-Android_8.0+_(API_26+)-C9A24B.svg?logo=android)](https://developer.android.com)
 [![Jetpack Compose](https://img.shields.io/badge/Jetpack_Compose-Material_3-0F4C3A.svg?logo=jetpackcompose)](https://developer.android.com/jetpack/compose)
 [![Glance](https://img.shields.io/badge/Jetpack_Glance-1.1.0-C9A24B.svg)](https://developer.android.com/jetpack/androidx/releases/glance)
+[![Release: v1.1.0](https://img.shields.io/badge/Release-v1.1.0-0F4C3A.svg)](https://github.com/officialtofeekposwal/PoswalNoor/releases/tag/v1.1.0)
 [![Build Status](https://img.shields.io/badge/Build-Passing-0F4C3A.svg)](#)
 
-[Download Latest APK (v1.0.0)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v1.0.0/PoswalNoor-v1.0.0-debug.apk) • [Releases](https://github.com/officialtofeekposwal/PoswalNoor/releases) • [Architecture](#architecture--project-structure) • [Getting Started](#getting-started)
+[Download Latest APK (v1.1.0)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v1.1.0/PoswalNoor-v1.1.0-debug.apk) • [Releases](https://github.com/officialtofeekposwal/PoswalNoor/releases) • [Architecture](#architecture--project-structure) • [Getting Started](#getting-started)
 
 </div>
 
@@ -56,6 +57,12 @@ Most contemporary apps are cluttered with intrusive ads, background trackers, an
   - **Sahih al-Bukhari** and **Sahih Muslim** hadiths with verified book numbers, hadith indices, and authenticity gradings.
 - **🏷️ Topic-Based Categorization**:
   - Filter content across 9 essential life themes: `Namaz`, `Sabr`, `Akhlaq`, `Parents`, `Dua`, `Akhirah`, `Ilm`, `Charity`, `Family`.
+- **💎 Apple-Inspired Liquid Glass UI Suite (v1.1.0)**:
+  - Reusable modular `Modifier.liquidGlass` with physical 5-layer optical styling.
+  - Native hardware blur via `RenderEffect` on Android 12+ (API 31+) with graceful tint fallback on older devices.
+  - Directional refraction border gradient and specular inner highlight simulating physical glass bevel thickness.
+  - Complete glass component suite: `LiquidGlassCard`, tactile `LiquidGlassButton` (spring physics), and floating `LiquidGlassNavBar`.
+  - Advanced AGSL shader (`LiquidGlassShaders.kt`) for realistic chromatic aberration & lens refraction on Android 13+ (API 33).
 - **🎨 Brand Kit & Accessibility-Compliant Theme**:
   - Handcrafted luxury palette: Emerald (`#0F4C3A`), Deep Emerald (`#0A3427`), Gold (`#C9A24B`), and Ivory (`#F6F1E4`).
   - Strict WCAG contrast compliance: Gold is never placed as text over Ivory (maintaining >9:1 readable contrast).
