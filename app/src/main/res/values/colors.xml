@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Poswal Noor brand palette -->
+    <color name="noor_emerald">#0F4C3A</color>
+    <color name="noor_emerald_deep">#0A3427</color>
+    <color name="noor_gold">#C9A24B</color>
+    <color name="noor_ivory">#F6F1E4</color>
+
+    <!-- Semantic roles (light) -->
+    <color name="noor_background">@color/noor_ivory</color>
+    <color name="noor_primary">@color/noor_emerald</color>
+    <color name="noor_accent">@color/noor_gold</color>
+    <color name="noor_on_primary">@color/noor_ivory</color>
+    <color name="ic_launcher_background">@color/noor_emerald_deep</color>
+</resources>

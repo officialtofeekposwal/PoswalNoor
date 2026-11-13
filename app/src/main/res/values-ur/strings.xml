@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Poswal Noor</string>
+    <string name="widget_name">Poswal Noor</string>
+    <string name="widget_description">روزانہ قرآنی آیات اور مستند احادیث</string>
+    <string name="action_refresh">تبدیل کریں</string>
+    <string name="action_read_more">مزید پڑھیں</string>
+    <string name="action_copy">کاپی کریں</string>
+    <string name="action_share">شیئر کریں</string>
+    <string name="action_share_card">کارڈ شیئر کریں</string>
+    <string name="action_favorite">پسندیدہ</string>
+    <string name="action_unfavorite">ہٹائیں</string>
+    <string name="action_settings">ترتیبات</string>
+    <string name="action_continue">آگے بڑھیں</string>
+
+    <string name="label_quran">قرآن</string>
+    <string name="label_hadith">حدیث</string>
+    <string name="label_both">دونوں</string>
+    <string name="label_filter">موضوع کے لحاظ سے فلٹر</string>
+    <string name="label_verse_of_the_day">آج کا پیغام</string>
+    <string name="label_all_topics">تمام موضوعات</string>
+
+    <string name="title_onboarding">زبان منتخب کریں</string>
+    <string name="subtitle_onboarding">انٹرفیس اور ترجمے کے لیے اپنی پسندیدہ زبان منتخب کریں۔</string>
+    <string name="title_settings">ترتیبات</string>
+    <string name="setting_app_language">ایپ کی زبان</string>
+    <string name="setting_content_type">مواد کی قسم</string>
+    <string name="setting_topics">موضوعات کا فلٹر</string>
+    <string name="setting_auto_refresh">وجیٹ کا خودکار بدلاؤ</string>
+    <string name="setting_font_size">عربی فونٹ سائز</string>
+
+    <string name="interval_1h">ہر 1 گھنٹہ</string>
+    <string name="interval_3h">ہر 3 گھنٹے</string>
+    <string name="interval_6h">ہر 6 گھنٹے</string>
+    <string name="interval_12h">ہر 12 گھنٹے</string>
+    <string name="interval_24h">ہر 24 گھنٹے</string>
+
+    <!-- Topics -->
+    <string name="topic_namaz">نماز</string>
+    <string name="topic_sabr">صبر</string>
+    <string name="topic_akhlaq">اخلاق</string>
+    <string name="topic_parents">والدین</string>
+    <string name="topic_dua">دعا</string>
+    <string name="topic_akhirah">آخرت</string>
+    <string name="topic_ilm">علم</string>
+    <string name="topic_charity">صدقہ و خیرات</string>
+    <string name="topic_family">خاندان و صلہ رحمی</string>
+
+    <!-- Fallback badge & feedback -->
+    <string name="badge_english_fallback">انگریزی</string>
+    <string name="toast_copied">کاپی کر لیا گیا</string>
+    <string name="share_footer">Poswal Noor — اسلامی رفیق</string>
+</resources>

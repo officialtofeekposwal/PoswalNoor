@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="noor_background">@color/noor_emerald_deep</color>
+    <color name="noor_primary">@color/noor_gold</color>
+    <color name="noor_accent">@color/noor_gold</color>
+    <color name="noor_on_primary">@color/noor_emerald_deep</color>
+</resources>

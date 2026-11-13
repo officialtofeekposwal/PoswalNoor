@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Poswal Noor</string>
+    <string name="widget_name">Poswal Noor</string>
+    <string name="widget_description">दैनिक क़ुरआन आयत और प्रामाणिक हदीस साथी</string>
+    <string name="action_refresh">नया बदलें</string>
+    <string name="action_read_more">और पढ़ें</string>
+    <string name="action_copy">कॉपी करें</string>
+    <string name="action_share">शेयर करें</string>
+    <string name="action_share_card">कार्ड शेयर करें</string>
+    <string name="action_favorite">पसंदीदा</string>
+    <string name="action_unfavorite">हटाएं</string>
+    <string name="action_settings">सेटिंग्स</string>
+    <string name="action_continue">आगे बढ़ें</string>
+
+    <string name="label_quran">क़ुरआन</string>
+    <string name="label_hadith">हदीस</string>
+    <string name="label_both">दोनों</string>
+    <string name="label_filter">विषय अनुसार फ़िल्टर</string>
+    <string name="label_verse_of_the_day">आज का विचार</string>
+    <string name="label_all_topics">सभी विषय</string>
+
+    <string name="title_onboarding">भाषा चुनें</string>
+    <string name="subtitle_onboarding">इंटरफ़ेस और अनुवाद के लिए अपनी पसंदीदा भाषा चुनें।</string>
+    <string name="title_settings">सेटिंग्स</string>
+    <string name="setting_app_language">ऐप भाषा</string>
+    <string name="setting_content_type">सामग्री प्रकार</string>
+    <string name="setting_topics">विषय फ़िल्टर</string>
+    <string name="setting_auto_refresh">विजेट स्वतः-ताज़ा</string>
+    <string name="setting_font_size">अरबी फ़ॉन्ट आकार</string>
+
+    <string name="interval_1h">प्रत्येक 1 घंटा</string>
+    <string name="interval_3h">प्रत्येक 3 घंटे</string>
+    <string name="interval_6h">प्रत्येक 6 घंटे</string>
+    <string name="interval_12h">प्रत्येक 12 घंटे</string>
+    <string name="interval_24h">प्रत्येक 24 घंटे</string>
+
+    <!-- Topics -->
+    <string name="topic_namaz">नमाज़</string>
+    <string name="topic_sabr">सब्र (धैर्य)</string>
+    <string name="topic_akhlaq">अख़लाक़ (सदाचार)</string>
+    <string name="topic_parents">माता-पिता</string>
+    <string name="topic_dua">दुआ (प्रार्थना)</string>
+    <string name="topic_akhirah">आख़िरत (परलोक)</string>
+    <string name="topic_ilm">इल्म (ज्ञान)</string>
+    <string name="topic_charity">सदक़ा (दान)</string>
+    <string name="topic_family">परिवार</string>
+
+    <!-- Fallback badge & feedback -->
+    <string name="badge_english_fallback">अंग्रेज़ी</string>
+    <string name="toast_copied">कॉपी कर लिया गया</string>
+    <string name="share_footer">Poswal Noor — इस्लामिक साथी</string>
+</resources>
