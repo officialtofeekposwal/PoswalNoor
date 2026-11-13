@@ -18,6 +18,10 @@ import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.state.updateAppWidgetState
 import androidx.glance.background
 import androidx.glance.currentState
+import androidx.glance.Image
+import androidx.glance.ImageProvider
+import androidx.glance.layout.size
+import androidx.glance.layout.width
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
@@ -122,16 +126,22 @@ class NoorGlanceWidget : GlanceAppWidget() {
                             modifier = GlanceModifier.fillMaxSize(),
                             verticalAlignment = Alignment.Top
                         ) {
-                            // Header: Poswal Noor + Type Tag
+                            // Header: Poswal Noor Icon + Title + Type Tag
                             Row(
                                 modifier = GlanceModifier.fillMaxWidth(),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
+                                Image(
+                                    provider = ImageProvider(R.drawable.ic_noor_mark),
+                                    contentDescription = null,
+                                    modifier = GlanceModifier.size(18.dp)
+                                )
+                                Spacer(modifier = GlanceModifier.width(6.dp))
                                 Text(
-                                    text = "Poswal Noor",
+                                    text = "POSWAL NOOR",
                                     style = TextStyle(
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 14.sp,
+                                        fontSize = 12.sp,
                                         color = GlanceTheme.colors.primary
                                     )
                                 )
@@ -153,7 +163,7 @@ class NoorGlanceWidget : GlanceAppWidget() {
                                 text = item.arabic,
                                 style = TextStyle(
                                     fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp,
+                                    fontSize = 15.sp,
                                     textAlign = TextAlign.Center,
                                     color = GlanceTheme.colors.onBackground
                                 ),
@@ -166,23 +176,16 @@ class NoorGlanceWidget : GlanceAppWidget() {
                             if (!translation.isNullOrEmpty()) {
                                 Spacer(modifier = GlanceModifier.height(4.dp))
                                 Text(
-                                    text = translation,
+                                    text = "$translation [${item.reference}]",
                                     style = TextStyle(
                                         fontSize = 12.sp,
                                         color = GlanceTheme.colors.onBackground
                                     ),
-                                    maxLines = 2,
+                                    maxLines = 3,
                                     modifier = GlanceModifier.fillMaxWidth()
                                 )
-                            }
-
-                            Spacer(modifier = GlanceModifier.height(6.dp))
-
-                            // Footer: Reference in Bold + Actions
-                            Row(
-                                modifier = GlanceModifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
+                            } else {
+                                Spacer(modifier = GlanceModifier.height(4.dp))
                                 Text(
                                     text = item.reference,
                                     style = TextStyle(
@@ -191,39 +194,51 @@ class NoorGlanceWidget : GlanceAppWidget() {
                                         color = GlanceTheme.colors.primary
                                     )
                                 )
+                            }
 
-                                Spacer(modifier = GlanceModifier.defaultWeight())
+                            Spacer(modifier = GlanceModifier.defaultWeight())
 
-                                // Refresh action
-                                Text(
-                                    text = localizedContext.getString(R.string.action_refresh),
-                                    style = TextStyle(
-                                        fontSize = 11.sp,
-                                        fontWeight = FontWeight.Medium,
-                                        color = GlanceTheme.colors.secondary
-                                    ),
-                                    modifier = GlanceModifier
-                                        .padding(horizontal = 6.dp, vertical = 2.dp)
-                                        .clickable(actionRunCallback<RefreshWidgetCallback>())
-                                )
-
-                                // Read more action
+                            // Bottom Row: "Read more >" on Left + Circular Refresh Button on Right
+                            Row(
+                                modifier = GlanceModifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 val contentIdParamKey = androidx.glance.action.ActionParameters.Key<Long>("contentId")
                                 Text(
-                                    text = localizedContext.getString(R.string.action_read_more),
+                                    text = "${localizedContext.getString(R.string.action_read_more)} ›",
                                     style = TextStyle(
-                                        fontSize = 11.sp,
+                                        fontSize = 13.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = GlanceTheme.colors.primary
                                     ),
                                     modifier = GlanceModifier
-                                        .padding(horizontal = 6.dp, vertical = 2.dp)
                                         .clickable(
                                             actionStartActivity<MainActivity>(
                                                 actionParametersOf(contentIdParamKey to item.id)
                                             )
                                         )
                                 )
+
+                                Spacer(modifier = GlanceModifier.defaultWeight())
+
+                                // Circular Refresh Button (matching reference widget)
+                                Box(
+                                    modifier = GlanceModifier
+                                        .size(34.dp)
+                                        .background(GlanceTheme.colors.primary)
+                                        .cornerRadius(17.dp)
+                                        .clickable(actionRunCallback<RefreshWidgetCallback>()),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "↻",
+                                        style = TextStyle(
+                                            color = GlanceTheme.colors.onPrimary,
+                                            fontSize = 18.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    )
+                                }
                             }
                         }
                     }

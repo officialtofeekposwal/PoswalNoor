@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Home Screen Widget Receiver -->
+        <!-- Home Screen Widget Receiver (4x2) -->
         <receiver
             android:name=".widget.NoorWidgetReceiver"
             android:exported="true"
@@ -51,6 +51,19 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/noor_widget_4x2_info" />
+        </receiver>
+
+        <!-- Home Screen Widget Receiver (4x3) -->
+        <receiver
+            android:name=".widget.NoorWidget4x3Receiver"
+            android:exported="true"
+            android:label="@string/widget_name_4x3">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/noor_widget_4x3_info" />
         </receiver>
 
     </application>

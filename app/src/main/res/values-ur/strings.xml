@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Poswal Noor</string>
-    <string name="widget_name">Poswal Noor</string>
+    <string name="widget_name">Poswal Noor (4x2)</string>
+    <string name="widget_name_4x3">Poswal Noor (بڑا 4x3)</string>
     <string name="widget_description">روزانہ قرآنی آیات اور مستند احادیث</string>
     <string name="action_refresh">تبدیل کریں</string>
     <string name="action_read_more">مزید پڑھیں</string>
@@ -12,6 +13,8 @@
     <string name="action_unfavorite">ہٹائیں</string>
     <string name="action_settings">ترتیبات</string>
     <string name="action_continue">آگے بڑھیں</string>
+    <string name="action_add_widget_to_home">ہوم اسکرین پر وجیٹ لگائیں</string>
+    <string name="action_add_widget_subtitle">روزانہ کا پیغام اپنے موبائل کی ہوم اسکرین پر شامل کریں</string>
 
     <string name="label_quran">قرآن</string>
     <string name="label_hadith">حدیث</string>
