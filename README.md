@@ -13,7 +13,7 @@
 [![Glance](https://img.shields.io/badge/Jetpack_Glance-1.1.0-C9A24B.svg)](https://developer.android.com/jetpack/androidx/releases/glance)
 [![Build Status](https://img.shields.io/badge/Build-Passing-0F4C3A.svg)](#)
 
-[Download Latest APK](PoswalNoor-v1.0.0-debug.apk) • [Architecture](#architecture--project-structure) • [Getting Started](#getting-started) • [Licensing & Sources](#content-sources--licensing)
+[Download Latest APK (v1.0.0)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v1.0.0/PoswalNoor-v1.0.0-debug.apk) • [Releases](https://github.com/officialtofeekposwal/PoswalNoor/releases) • [Architecture](#architecture--project-structure) • [Getting Started](#getting-started)
 
 </div>
 
