@@ -5,6 +5,7 @@ import com.poswal.noor.data.local.entity.BookmarkEntity
 import com.poswal.noor.data.local.entity.ContentItemEntity
 import com.poswal.noor.data.local.entity.SurahEntity
 import com.poswal.noor.domain.model.ContentType
+import com.poswal.noor.domain.model.HadithBookInfo
 import kotlinx.coroutines.flow.Flow
 
 interface ContentRepository {
@@ -55,7 +56,8 @@ interface ContentRepository {
     fun getAllSurahs(): Flow<List<SurahEntity>>
     fun getAyahsForSurah(surahNumber: Int): Flow<List<ContentItemEntity>>
     suspend fun getSurahByNumber(number: Int): SurahEntity?
-    fun getPagedHadiths(collection: String): Flow<PagingData<ContentItemEntity>>
+    fun getHadithBooks(collection: String): Flow<List<HadithBookInfo>>
+    fun getPagedHadiths(collection: String, bookNumber: Int? = null): Flow<PagingData<ContentItemEntity>>
 
     // --- Offline Search ---
     fun searchContent(query: String): Flow<List<ContentItemEntity>>

@@ -20,6 +20,7 @@ import com.poswal.noor.core.designsystem.NoorTheme
 import com.poswal.noor.core.designsystem.NoorThemeTokens
 import com.poswal.noor.core.designsystem.components.FloatingGlassNavBar
 import com.poswal.noor.core.designsystem.components.NoorNavTab
+import com.poswal.noor.feature.hadith.HadithScreen
 import com.poswal.noor.feature.quran.QuranReaderScreen
 import com.poswal.noor.feature.quran.QuranScreen
 import com.poswal.noor.feature.showcase.DesignShowcaseScreen
@@ -104,7 +105,7 @@ fun MainAppScaffold() {
                             activeReaderTarget = Pair(surah, ayah)
                         },
                         onNavigateToHadithDetail = { _ ->
-                            // Phase 4 Hadith
+                            currentTab = NoorNavTab.HADITH
                         }
                     )
                 }
@@ -116,10 +117,10 @@ fun MainAppScaffold() {
                     )
                 }
                 NoorNavTab.HADITH -> {
-                    TabPlaceholderScreen(
-                        title = "Sahih Hadith Collections",
-                        subtitle = "Phase 4: Sahih al-Bukhari & Sahih Muslim authentic books, chapters & gradings.",
-                        onShowDesignShowcase = { showDesignShowcase = true }
+                    HadithScreen(
+                        onNavigateBackToHome = {
+                            currentTab = NoorNavTab.TODAY
+                        }
                     )
                 }
                 NoorNavTab.SAVED -> {

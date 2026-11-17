@@ -4,7 +4,8 @@ Poswal Noor — Offline Content Database Builder & Validator
 Reproducibly generates poswal_noor.db from verified open-source datasets:
 1. Tanzil Project / Quran Complex: 6,236 Ayahs in pristine Uthmani Arabic,
    Sahih International (English), Suhel Farooq Khan (Hindi), Muhammad Junagarhi (Urdu).
-2. Sahih al-Bukhari & Sahih Muslim: Verified open collections with book, hadith numbers, and authenticity grading.
+2. Sahih al-Bukhari & Sahih Muslim: Verified open collections with full authentic Arabic text,
+   book/chapter names, hadith numbers, narrator, and authenticity grading.
 """
 
 import os
@@ -31,6 +32,8 @@ SOURCES = {
     "quran_urdu": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/urd-muhammadjunagar.json",
     "hadith_bukhari": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/eng-bukhari.json",
     "hadith_muslim": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/eng-muslim.json",
+    "ara_bukhari": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.json",
+    "ara_muslim": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.json",
 }
 
 # 114 Surahs Metadata (number, arabic, english, transliteration, verses, revelation)
@@ -48,7 +51,7 @@ SURAHS = [
     (11, "هود", "Hud", "Hud", 123, "Meccan"),
     (12, "يوسف", "Yusuf", "Joseph", 111, "Meccan"),
     (13, "الرعد", "Ar-Ra'd", "The Thunder", 43, "Medinan"),
-    (14, "ابراهيم", "Ibrahim", "Abraham", 52, "Meccan"),
+    (14, "إبراهيم", "Ibrahim", "Abraham", 52, "Meccan"),
     (15, "الحجر", "Al-Hijr", "The Rocky Tract", 99, "Meccan"),
     (16, "النحل", "An-Nahl", "The Bee", 128, "Meccan"),
     (17, "الإسراء", "Al-Isra", "The Night Journey", 111, "Meccan"),
@@ -68,11 +71,11 @@ SURAHS = [
     (31, "لقمان", "Luqman", "Luqman", 34, "Meccan"),
     (32, "السجدة", "As-Sajdah", "The Prostration", 30, "Meccan"),
     (33, "الأحزاب", "Al-Ahzab", "The Combined Forces", 73, "Medinan"),
-    (34, "سبإ", "Saba", "Sheba", 54, "Meccan"),
+    (34, "سبأ", "Saba", "Sheba", 54, "Meccan"),
     (35, "فاطر", "Fatir", "Originator", 45, "Meccan"),
-    (36, "يس", "Ya-Sin", "Ya-Sin", 83, "Meccan"),
+    (36, "يس", "Ya-Sin", "Ya Sin", 83, "Meccan"),
     (37, "الصافات", "As-Saffat", "Those who set the Ranks", 182, "Meccan"),
-    (38, "ص", "Sad", "The Letter 'Saad'", 88, "Meccan"),
+    (38, "ص", "Sad", "The letter 'Saad'", 88, "Meccan"),
     (39, "الزمر", "Az-Zumar", "The Troops", 75, "Meccan"),
     (40, "غافر", "Ghafir", "The Forgiver", 85, "Meccan"),
     (41, "فصلت", "Fussilat", "Explained in Detail", 54, "Meccan"),
@@ -84,7 +87,7 @@ SURAHS = [
     (47, "محمد", "Muhammad", "Muhammad", 38, "Medinan"),
     (48, "الفتح", "Al-Fath", "The Victory", 29, "Medinan"),
     (49, "الحجرات", "Al-Hujurat", "The Rooms", 18, "Medinan"),
-    (50, "ق", "Qaf", "The Letter 'Qaf'", 45, "Meccan"),
+    (50, "ق", "Qaf", "The letter 'Qaf'", 45, "Meccan"),
     (51, "الذاريات", "Adh-Dhariyat", "The Winnowing Winds", 60, "Meccan"),
     (52, "الطور", "At-Tur", "The Mount", 49, "Meccan"),
     (53, "النجم", "An-Najm", "The Star", 62, "Meccan"),
@@ -96,7 +99,7 @@ SURAHS = [
     (59, "الحشر", "Al-Hashr", "The Exile", 24, "Medinan"),
     (60, "الممتحنة", "Al-Mumtahanah", "She that is to be examined", 13, "Medinan"),
     (61, "الصف", "As-Saf", "The Ranks", 14, "Medinan"),
-    (62, "الجمعة", "Al-Jumu'ah", "The Congregation, Friday", 11, "Medinan"),
+    (62, "الجمعة", "Al-Jumu'ah", "The Congregation", 11, "Medinan"),
     (63, "المنافقون", "Al-Munafiqun", "The Hypocrites", 11, "Medinan"),
     (64, "التغابن", "At-Taghabun", "The Mutual Disillusion", 18, "Medinan"),
     (65, "الطلاق", "At-Talaq", "The Divorce", 12, "Medinan"),
@@ -110,17 +113,17 @@ SURAHS = [
     (73, "المزمل", "Al-Muzzammil", "The Enshrouded One", 20, "Meccan"),
     (74, "المدثر", "Al-Muddaththir", "The Cloaked One", 56, "Meccan"),
     (75, "القيامة", "Al-Qiyamah", "The Resurrection", 40, "Meccan"),
-    (76, "الانسان", "Al-Insan", "The Human", 31, "Medinan"),
+    (76, "الإنسان", "Al-Insan", "Man", 31, "Medinan"),
     (77, "المرسلات", "Al-Mursalat", "The Emissaries", 50, "Meccan"),
-    (78, "النبإ", "An-Naba", "The Tidings", 40, "Meccan"),
+    (78, "النبأ", "An-Naba", "The Tidings", 40, "Meccan"),
     (79, "النازعات", "An-Nazi'at", "Those who drag forth", 46, "Meccan"),
-    (80, "عبس", "'Abasa", "He Frowned", 42, "Meccan"),
+    (80, "عبس", "'Abasa", "He frowned", 42, "Meccan"),
     (81, "التكوير", "At-Takwir", "The Overthrowing", 29, "Meccan"),
-    (82, "الإنفطار", "Al-Infitar", "The Cleaving", 19, "Meccan"),
-    (83, "المطففين", "Al-Mutaffifin", "The Defrauding", 36, "Meccan"),
-    (84, "الإنشقاق", "Al-Inshiqaq", "The Splitting Open", 25, "Meccan"),
+    (82, "الانفطار", "Al-Infitar", "The Cleaving", 19, "Meccan"),
+    (83, "المطففين", "Al-Mutaffifin", "Defrauding", 36, "Meccan"),
+    (84, "الانشقاق", "Al-Inshiqaq", "The Splitting Asunder", 25, "Meccan"),
     (85, "البروج", "Al-Buruj", "The Mansions of the Stars", 22, "Meccan"),
-    (86, "الطارق", "At-Tariq", "The Nightcometh", 17, "Meccan"),
+    (86, "الطارق", "At-Tariq", "The Morning Star", 17, "Meccan"),
     (87, "الأعلى", "Al-A'la", "The Most High", 19, "Meccan"),
     (88, "الغاشية", "Al-Ghashiyah", "The Overwhelming", 26, "Meccan"),
     (89, "الفجر", "Al-Fajr", "The Dawn", 30, "Meccan"),
@@ -136,13 +139,13 @@ SURAHS = [
     (99, "الزلزلة", "Az-Zalzalah", "The Earthquake", 8, "Medinan"),
     (100, "العاديات", "Al-'Adiyat", "The Courser", 11, "Meccan"),
     (101, "القارعة", "Al-Qari'ah", "The Calamity", 11, "Meccan"),
-    (102, "التكاثر", "At-Takathur", "The Rivalry in world increase", 8, "Meccan"),
+    (102, "التكاثر", "At-Takathur", "The Rivalry in World Increase", 8, "Meccan"),
     (103, "العصر", "Al-'Asr", "The Declining Day", 3, "Meccan"),
     (104, "الهمزة", "Al-Humazah", "The Traducer", 9, "Meccan"),
     (105, "الفيل", "Al-Fil", "The Elephant", 5, "Meccan"),
     (106, "قريش", "Quraysh", "Quraysh", 4, "Meccan"),
-    (107, "الماعون", "Al-Ma'un", "The Small Kindnesses", 7, "Meccan"),
-    (108, "الكوثر", "Al-Kawthar", "The Abundance", 3, "Meccan"),
+    (107, "الماعون", "Al-Ma'un", "Small Kindnesses", 7, "Meccan"),
+    (108, "الكوثر", "Al-Kawthar", "Abundance", 3, "Meccan"),
     (109, "الكافرون", "Al-Kafirun", "The Disbelievers", 6, "Meccan"),
     (110, "النصر", "An-Nasr", "The Divine Support", 3, "Medinan"),
     (111, "المسد", "Al-Masad", "The Palm Fiber", 5, "Meccan"),
@@ -151,7 +154,8 @@ SURAHS = [
     (114, "الناس", "An-Nas", "Mankind", 6, "Meccan"),
 ]
 
-# Conservative Topic Keyword Mappings (High Confidence Only)
+# Refined Topic Keyword Mappings (High Confidence Only)
+# Note: Broad words like 'know' / 'understand' removed from 'ilm' to eliminate false positives
 TOPIC_KEYWORDS = {
     "namaz": [r"\bprayer\b", r"\bprayers\b", r"\bpray\b", r"\bsalah\b", r"\bprostrat", r"\bruku\b", r"\bsajdah\b", r"\bnamaz\b"],
     "sabr": [r"\bpatien", r"\bpersever", r"\bendur", r"\bsabr\b", r"\bsteadfast\b"],
@@ -159,7 +163,7 @@ TOPIC_KEYWORDS = {
     "parents": [r"\bparent", r"\bmother\b", r"\bfather\b", r"\bwalidain\b"],
     "dua": [r"\bsupplicat", r"\bcall upon me\b", r"\binvok", r"\bdua\b", r"\bask allah\b"],
     "akhirah": [r"\bday of resurrection\b", r"\bhereafter\b", r"\bparadise\b", r"\bgarden\b", r"\bhell\b", r"\bfire\b", r"\bjudgment\b", r"\bakhirah\b"],
-    "ilm": [r"\bknowledge\b", r"\bknow\b", r"\bwise\b", r"\bwisdom\b", r"\bscholar\b", r"\bteach\b", r"\bunderstand\b"],
+    "ilm": [r"\bknowledge\b", r"\bwisdom\b", r"\bscholar\b", r"\bseeking knowledge\b"],
     "family": [r"\bkinship\b", r"\bwife\b", r"\bwives\b", r"\bhusband\b", r"\bchildren\b", r"\boffspring\b", r"\bfamily\b", r"\bbrother\b", r"\bsister\b"],
     "akhlaq": [r"\btruthful", r"\bhonesty\b", r"\bforgiv", r"\bmercy\b", r"\bmerciful\b", r"\bhumble\b", r"\bkindness\b", r"\bjustice\b", r"\bgood conduct\b", r"\bcharacter\b"],
 }
@@ -183,9 +187,15 @@ def assign_topic(text):
                 return topic
     return None
 
+def extract_narrator(text):
+    m = re.match(r"^(?:Narrated|Reported by|It was narrated that)\s+([^:.]+?)(?::|\s+said|\s+reported)", text)
+    if m:
+        return m.group(1).strip()
+    return None
+
 def main():
     print("=" * 70)
-    print("🌙 POSWAL NOOR — CONTENT DATABASE EXPANSION (6,236 QURAN + SAHIH HADITH)")
+    print("🌙 POSWAL NOOR — CONTENT DATABASE BUILDER (WITH ARABIC HADITHS)")
     print("=" * 70)
 
     # 1. Download all required sources
@@ -219,17 +229,46 @@ def main():
 
     surah_meta = {s[0]: s for s in SURAHS}
 
-    # 3. Parse Hadith datasets
-    print("\n[Step 3/5] Parsing Sahih Hadith collections...")
+    # 3. Parse Hadith datasets (English + Arabic)
+    print("\n[Step 3/5] Parsing Sahih Hadith collections (Bukhari & Muslim)...")
     with open(local_files["hadith_bukhari"], "r", encoding="utf-8") as f:
         bukhari_raw = json.load(f)
     with open(local_files["hadith_muslim"], "r", encoding="utf-8") as f:
         muslim_raw = json.load(f)
+    with open(local_files["ara_bukhari"], "r", encoding="utf-8") as f:
+        ara_bukhari_raw = json.load(f)
+    with open(local_files["ara_muslim"], "r", encoding="utf-8") as f:
+        ara_muslim_raw = json.load(f)
+
+    bukhari_sections = bukhari_raw.get("metadata", {}).get("sections", {})
+    muslim_sections = muslim_raw.get("metadata", {}).get("sections", {})
+
+    ara_bukhari_map = {}
+    for h in ara_bukhari_raw.get("hadiths", []):
+        num = h.get("hadithnumber")
+        txt = h.get("text", "").strip()
+        if num is not None and txt:
+            ara_bukhari_map[num] = txt
+            ara_bukhari_map[str(num)] = txt
+            if isinstance(num, float) and num.is_integer():
+                ara_bukhari_map[int(num)] = txt
+                ara_bukhari_map[str(int(num))] = txt
+
+    ara_muslim_map = {}
+    for h in ara_muslim_raw.get("hadiths", []):
+        num = h.get("hadithnumber")
+        txt = h.get("text", "").strip()
+        if num is not None and txt:
+            ara_muslim_map[num] = txt
+            ara_muslim_map[str(num)] = txt
+            if isinstance(num, float) and num.is_integer():
+                ara_muslim_map[int(num)] = txt
+                ara_muslim_map[str(int(num))] = txt
 
     bukhari_items = bukhari_raw.get("hadiths", [])
     muslim_items = muslim_raw.get("hadiths", [])
-    print(f"  Sahih al-Bukhari entries: {len(bukhari_items)}")
-    print(f"  Sahih Muslim entries:     {len(muslim_items)}")
+    print(f"  Sahih al-Bukhari entries: {len(bukhari_items)} (Arabic mapped: {len(ara_bukhari_map)})")
+    print(f"  Sahih Muslim entries:     {len(muslim_items)} (Arabic mapped: {len(ara_muslim_map)})")
 
     # 4. Create SQLite Database
     print(f"\n[Step 4/5] Building SQLite database at {OUTPUT_DB} ...")
@@ -242,7 +281,7 @@ def main():
     cur.execute("PRAGMA page_size = 4096;")
     cur.execute("PRAGMA encoding = 'UTF-8';")
 
-    # Table: surahs (matching Room NoorDatabase_Impl schema)
+    # Table: surahs
     cur.execute("""
         CREATE TABLE IF NOT EXISTS `surahs` (
             `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -261,7 +300,7 @@ def main():
             VALUES (?, ?, ?, ?, ?, ?)
         """, s)
 
-    # Table: content_items (matching Room NoorDatabase_Impl schema)
+    # Table: content_items
     cur.execute("""
         CREATE TABLE IF NOT EXISTS `content_items` (
             `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -301,24 +340,23 @@ def main():
 
         s_num = ara["chapter"]
         a_num = ara["verse"]
-        s_info = surah_meta.get(s_num)
-        s_name = s_info[2] if s_info else f"Surah {s_num}"
+        s_meta = surah_meta[s_num]
+        s_name = s_meta[2]
 
-        ref = f"Surah {s_name} {s_num}:{a_num}"
-        eng_text = eng["text"].strip()
         ara_text = ara["text"].strip()
+        eng_text = eng["text"].strip()
         hin_text = hin["text"].strip()
         urd_text = urd["text"].strip()
 
-        # Word counts
-        wc_en = len(eng_text.split())
+        ref = f"Surah {s_name} {s_num}:{a_num}"
         wc_ar = len(ara_text.split())
+        wc_en = len(eng_text.split())
+
         if wc_en <= 40:
             quran_word_counts_under_40 += 1
         if wc_en <= 60:
             quran_word_counts_under_60 += 1
 
-        # Topic detection on verified English translation
         topic = assign_topic(eng_text)
         if topic:
             topic_counts[topic] += 1
@@ -339,8 +377,8 @@ def main():
             wc_ar, wc_en
         ))
 
-    # Populate Hadiths (Filtered to complete text with valid translations)
-    print("  Inserting Sahih Hadiths (Bukhari & Muslim)...")
+    # Populate Hadiths
+    print("  Inserting Sahih Hadiths with authentic Arabic text...")
     hadith_inserted = 0
     hadith_word_counts_under_40 = 0
     hadith_word_counts_under_60 = 0
@@ -349,8 +387,15 @@ def main():
         eng_text = item.get("text", "").strip()
         if not eng_text or len(eng_text) < 15 or len(eng_text) > 1200:
             continue
-        h_num = str(item.get("hadithnumber", ""))
+        h_num_raw = item.get("hadithnumber")
+        h_num = str(h_num_raw) if h_num_raw is not None else ""
+        ref_book = item.get("reference", {}).get("book")
+        book_title = bukhari_sections.get(str(ref_book), "")
+
         ref = f"Sahih al-Bukhari {h_num}" if h_num else "Sahih al-Bukhari"
+        if book_title:
+            ref = f"Sahih al-Bukhari · Book {ref_book} ({book_title}) · Hadith {h_num}"
+
         wc_en = len(eng_text.split())
         if wc_en <= 40:
             hadith_word_counts_under_40 += 1
@@ -361,23 +406,34 @@ def main():
         if topic:
             topic_counts[topic] += 1
 
+        # Real Arabic scripture matching
+        ara_text = ara_bukhari_map.get(h_num_raw, "")
+        if not ara_text and h_num:
+            ara_text = ara_bukhari_map.get(h_num, "")
+
+        narrator = extract_narrator(eng_text)
+
         cur.execute("""
             INSERT INTO content_items (
                 type, surah, ayah, surah_name, arabic,
                 translation_en, translation_hinglish, translation_hi, translation_ur,
                 reference, book, number, grade, narrator, topic,
                 word_count, word_count_en, is_favorite
-            ) VALUES (?, NULL, NULL, NULL, ?, ?, NULL, NULL, NULL, ?, ?, ?, ?, NULL, ?, ?, ?, 0)
+            ) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, ?, 0)
         """, (
             "hadith",
-            item.get("arabic", "").strip() or "قال رسول الله صلى الله عليه وسلم",
+            ref_book,
+            item.get("reference", {}).get("hadith"),
+            book_title or "Sahih al-Bukhari",
+            ara_text,
             eng_text,
             ref,
             "Sahih al-Bukhari",
             h_num,
             "Sahih",
+            narrator,
             topic,
-            wc_en,
+            len(ara_text.split()) if ara_text else wc_en,
             wc_en
         ))
         hadith_inserted += 1
@@ -386,8 +442,15 @@ def main():
         eng_text = item.get("text", "").strip()
         if not eng_text or len(eng_text) < 15 or len(eng_text) > 1200:
             continue
-        h_num = str(item.get("hadithnumber", ""))
+        h_num_raw = item.get("hadithnumber")
+        h_num = str(h_num_raw) if h_num_raw is not None else ""
+        ref_book = item.get("reference", {}).get("book")
+        book_title = muslim_sections.get(str(ref_book), "")
+
         ref = f"Sahih Muslim {h_num}" if h_num else "Sahih Muslim"
+        if book_title:
+            ref = f"Sahih Muslim · Book {ref_book} ({book_title}) · Hadith {h_num}"
+
         wc_en = len(eng_text.split())
         if wc_en <= 40:
             hadith_word_counts_under_40 += 1
@@ -398,23 +461,34 @@ def main():
         if topic:
             topic_counts[topic] += 1
 
+        # Real Arabic scripture matching
+        ara_text = ara_muslim_map.get(h_num_raw, "")
+        if not ara_text and h_num:
+            ara_text = ara_muslim_map.get(h_num, "")
+
+        narrator = extract_narrator(eng_text)
+
         cur.execute("""
             INSERT INTO content_items (
                 type, surah, ayah, surah_name, arabic,
                 translation_en, translation_hinglish, translation_hi, translation_ur,
                 reference, book, number, grade, narrator, topic,
                 word_count, word_count_en, is_favorite
-            ) VALUES (?, NULL, NULL, NULL, ?, ?, NULL, NULL, NULL, ?, ?, ?, ?, NULL, ?, ?, ?, 0)
+            ) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, ?, 0)
         """, (
             "hadith",
-            item.get("arabic", "").strip() or "قال رسول الله صلى الله عليه وسلم",
+            ref_book,
+            item.get("reference", {}).get("hadith"),
+            book_title or "Sahih Muslim",
+            ara_text,
             eng_text,
             ref,
             "Sahih Muslim",
             h_num,
             "Sahih",
+            narrator,
             topic,
-            wc_en,
+            len(ara_text.split()) if ara_text else wc_en,
             wc_en
         ))
         hadith_inserted += 1
@@ -439,6 +513,8 @@ def main():
     quran_total = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM content_items WHERE type='hadith'")
     hadith_total = cur.fetchone()[0]
+    cur.execute("SELECT COUNT(*) FROM content_items WHERE type='hadith' AND LENGTH(arabic) > 10")
+    hadith_with_arabic = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM content_items")
     grand_total = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM surahs")
@@ -454,15 +530,13 @@ def main():
     print(f"Total Rows in DB:               {grand_total:,}")
     print(f"  - Quran Ayahs:                {quran_total:,} (Expected: 6,236 -> {'MATCH ✅' if quran_total == 6236 else 'MISMATCH ❌'})")
     print(f"  - Hadiths (Bukhari + Muslim): {hadith_total:,}")
+    print(f"  - Hadiths with REAL Arabic:   {hadith_with_arabic:,} ({(hadith_with_arabic/hadith_total)*100:.1f}%)")
     print(f"Total Surahs Indexed:           {surah_total} (Expected: 114 -> {'MATCH ✅' if surah_total == 114 else 'MISMATCH ❌'})")
     print(f"Database File Size:             {db_size_mb:.2f} MB")
     print("\n📊 Topic Distribution (Conservative Match):")
     for t, cnt in sorted(topic_counts.items(), key=lambda x: -x[1]):
         print(f"  - {t:<10}: {cnt:,} items")
     print(f"  - Untagged (All/Both feed): {untagged_count:,} items")
-    print("\n📱 Widget Pool Statistics:")
-    print(f"  - Total items with English word_count <= 40 (4x2 Widget): {quran_word_counts_under_40 + hadith_word_counts_under_40:,} items")
-    print(f"  - Total items with English word_count <= 60 (4x3 Widget): {quran_word_counts_under_60 + hadith_word_counts_under_60:,} items")
     print("=" * 70)
 
 if __name__ == "__main__":

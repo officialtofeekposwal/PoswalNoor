@@ -11,6 +11,7 @@ import com.poswal.noor.data.local.entity.ContentItemEntity
 import com.poswal.noor.data.local.entity.SeenItemEntity
 import com.poswal.noor.data.local.entity.SurahEntity
 import com.poswal.noor.domain.model.ContentType
+import com.poswal.noor.domain.model.HadithBookInfo
 import com.poswal.noor.domain.repository.ContentRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -198,14 +199,24 @@ class ContentRepositoryImpl @Inject constructor(
         return contentDao.getSurahByNumber(number)
     }
 
-    override fun getPagedHadiths(collection: String): Flow<PagingData<ContentItemEntity>> {
+    override fun getHadithBooks(collection: String): Flow<List<HadithBookInfo>> {
+        return contentDao.getHadithBooks(collection)
+    }
+
+    override fun getPagedHadiths(collection: String, bookNumber: Int?): Flow<PagingData<ContentItemEntity>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
                 prefetchDistance = 5,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { contentDao.getHadithsForBook(collection) }
+            pagingSourceFactory = {
+                if (bookNumber != null) {
+                    contentDao.getPagedHadithsForBook(collection, bookNumber)
+                } else {
+                    contentDao.getPagedHadithsForCollection(collection)
+                }
+            }
         ).flow
     }
 

@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.poswal.noor.data.local.entity.ContentItemEntity
 import com.poswal.noor.data.local.entity.SurahEntity
+import com.poswal.noor.domain.model.HadithBookInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -139,8 +140,31 @@ interface ContentDao {
     suspend fun getSurahAyah(surah: Int, ayah: Int): ContentItemEntity?
 
     // --- Hadith Navigation ---
-    @Query("SELECT DISTINCT book FROM content_items WHERE type = 'hadith' AND book IS NOT NULL")
+    @Query("SELECT DISTINCT book FROM content_items WHERE type = 'hadith' AND book IS NOT NULL ORDER BY book ASC")
     fun getHadithCollections(): Flow<List<String>>
+
+    @Query("""
+        SELECT surah, surah_name, COUNT(*) AS hadith_count 
+        FROM content_items 
+        WHERE type = 'hadith' AND book = :collection AND surah IS NOT NULL
+        GROUP BY surah, surah_name 
+        ORDER BY surah ASC
+    """)
+    fun getHadithBooks(collection: String): Flow<List<HadithBookInfo>>
+
+    @Query("""
+        SELECT * FROM content_items 
+        WHERE type = 'hadith' AND book = :collection AND surah = :bookNumber 
+        ORDER BY CAST(number AS INTEGER) ASC, id ASC
+    """)
+    fun getPagedHadithsForBook(collection: String, bookNumber: Int): PagingSource<Int, ContentItemEntity>
+
+    @Query("""
+        SELECT * FROM content_items 
+        WHERE type = 'hadith' AND book = :collection 
+        ORDER BY CAST(number AS INTEGER) ASC, id ASC
+    """)
+    fun getPagedHadithsForCollection(collection: String): PagingSource<Int, ContentItemEntity>
 
     @Query("SELECT * FROM content_items WHERE type = 'hadith' AND book = :book ORDER BY CAST(number AS INTEGER) ASC")
     fun getHadithsForBook(book: String): PagingSource<Int, ContentItemEntity>

@@ -14,23 +14,21 @@ All spiritual scripture and text within **Poswal Noor** are derived strictly fro
 | **Urdu Translation** | **Maulana Muhammad Junagarhi** | Public Domain / Tanzil Project | [Tanzil.net](http://tanzil.net/trans/) |
 | **Hinglish (Roman Urdu / Hindi)** | 0% database coverage — currently defaults 100% to English fallback with UI badge | In Development | Poswal Noor Local Asset |
 
-### 📌 Tanzil Project Attribution & Terms (For About Screen)
+### 📌 Tanzil Project Terms of Use (Verbatim for About Screen)
 ```text
-The Holy Quran Arabic text and verified translations provided by Tanzil Project (tanzil.net).
-Copyright © 2007-2024 Tanzil Project.
-License: Creative Commons Attribution 3.0 Unported (CC-BY 3.0).
-Users may freely read, quote, and distribute this verified scripture.
-Special thanks to the Tanzil Project contributors and the King Fahd Quran Printing Complex.
+Permission is granted to copy and distribute verbatim copies of this Quran text, but changing the text is not allowed.
+
+This Quran text can be used in any website or application, provided that its source (Tanzil Project) is clearly indicated, and a link is made to tanzil.net to enable users to keep track of changes.
 ```
 
 ---
 
 ## 2. Hadith Collections (كتب الحديث الشريف) — 14,060 Records
 
-| Collection | Dataset Name & Origin | Records | Translation Authority | License & Upstream URL |
-| :--- | :--- | :--- | :--- | :--- |
-| **Sahih al-Bukhari (صحيح البخاري)** | **`hadith-api`** (Fawaz Ahmed Hadith API / Sunnah.com dump) | **7,050** | M. Muhsin Khan (English) | **Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA 4.0)**<br>URL: [https://github.com/fawazahmed0/hadith-api](https://github.com/fawazahmed0/hadith-api)<br>Edition: `eng-bukhari.json` |
-| **Sahih Muslim (صحيح مسلم)** | **`hadith-api`** (Fawaz Ahmed Hadith API / Sunnah.com dump) | **7,010** | Abdul Hamid Siddiqui (English) | **Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA 4.0)**<br>URL: [https://github.com/fawazahmed0/hadith-api](https://github.com/fawazahmed0/hadith-api)<br>Edition: `eng-muslim.json` |
+| Collection | Dataset Name & Origin | Records | Translation Authority | Dataset License | English Translation Copyright |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Sahih al-Bukhari (صحيح البخاري)** | **`hadith-api`** (Fawaz Ahmed Hadith API)<br>Editions: `ara-bukhari.json` (Arabic) & `eng-bukhari.json` (English) | **7,050** (97 Books) | M. Muhsin Khan | **The Unlicense** (Public Domain dedication for API repository)<br>URL: [https://github.com/fawazahmed0/hadith-api](https://github.com/fawazahmed0/hadith-api) | **UNVERIFIED** (Darussalam publication; license not explicitly stated in repo) |
+| **Sahih Muslim (صحيح مسلم)** | **`hadith-api`** (Fawaz Ahmed Hadith API)<br>Editions: `ara-muslim.json` (Arabic) & `eng-muslim.json` (English) | **7,010** (56 Books) | Abdul Hamid Siddiqui | **The Unlicense** (Public Domain dedication for API repository)<br>URL: [https://github.com/fawazahmed0/hadith-api](https://github.com/fawazahmed0/hadith-api) | **UNVERIFIED** (Kitab Bhavan publication; license not explicitly stated in repo) |
 
 ---
 
