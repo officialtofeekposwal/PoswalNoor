@@ -229,7 +229,7 @@ To safeguard religious sanctity, **no scripture text is generated, altered, or h
 <div align="center">
 
 Crafted with dedication by **[Tofeek Poswal](https://github.com/officialtofeekposwal)**  
-📧 Contact: `workwithtofeek@gmail.com` • `tofeeksocial@gmail.com`  
+📧 Contact: `workwithtofeek@gmail.com`  
 🐙 GitHub: [@officialtofeekposwal](https://github.com/officialtofeekposwal)
 
 ---
