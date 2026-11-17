@@ -4,7 +4,7 @@ import com.poswal.noor.data.local.entity.ContentItemEntity
 
 enum class AppLanguage(val tag: String, val nativeName: String, val isRtl: Boolean) {
     ENGLISH("en", "English", false),
-    HINGLISH("en-IN", "Hinglish (Roman)", false),
+    HINGLISH("en-IN", "Hinglish (English fallback)", false),
     HINDI("hi", "हिन्दी", false),
     URDU("ur", "اردو", true),
     ARABIC("ar", "العربية", true);

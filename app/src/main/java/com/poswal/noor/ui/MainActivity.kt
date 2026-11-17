@@ -1,8 +1,10 @@
 package com.poswal.noor.ui
 
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
@@ -18,6 +20,8 @@ import com.poswal.noor.core.designsystem.NoorTheme
 import com.poswal.noor.core.designsystem.NoorThemeTokens
 import com.poswal.noor.core.designsystem.components.FloatingGlassNavBar
 import com.poswal.noor.core.designsystem.components.NoorNavTab
+import com.poswal.noor.feature.quran.QuranReaderScreen
+import com.poswal.noor.feature.quran.QuranScreen
 import com.poswal.noor.feature.showcase.DesignShowcaseScreen
 import com.poswal.noor.feature.today.TodayScreen
 import com.poswal.noor.ui.components.TabPlaceholderScreen
@@ -48,6 +52,20 @@ fun MainAppScaffold() {
     var currentTab by remember { mutableStateOf(NoorNavTab.TODAY) }
     var showDesignShowcase by remember { mutableStateOf(false) }
 
+    // Active Quran reader navigation target: Pair(surahNumber, startAyah)
+    var activeReaderTarget by remember { mutableStateOf<Pair<Int, Int>?>(null) }
+
+    // Predictive / system back handling
+    BackHandler(enabled = activeReaderTarget != null || showDesignShowcase || currentTab != NoorNavTab.TODAY) {
+        if (showDesignShowcase) {
+            showDesignShowcase = false
+        } else if (activeReaderTarget != null) {
+            activeReaderTarget = null
+        } else if (currentTab != NoorNavTab.TODAY) {
+            currentTab = NoorNavTab.TODAY
+        }
+    }
+
     if (showDesignShowcase) {
         DesignShowcaseScreen(
             currentTab = currentTab,
@@ -59,58 +77,75 @@ fun MainAppScaffold() {
         return
     }
 
+    // If an ayah or surah is open in the full-screen reader
+    if (activeReaderTarget != null) {
+        val (surah, ayah) = activeReaderTarget!!
+        QuranReaderScreen(
+            surahNumber = surah,
+            startAyah = ayah,
+            onBackClick = { activeReaderTarget = null }
+        )
+        return
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
-        when (currentTab) {
-            NoorNavTab.TODAY -> {
-                TodayScreen(
-                    onNavigateToSearch = {
-                        // Hooked up in Phase 5
-                    },
-                    onNavigateToVerseDetail = { _ ->
-                        // Hooked up in Phase 3
-                    },
-                    onNavigateToSurahReader = { _, _ ->
-                        // Hooked up in Phase 3
-                    },
-                    onNavigateToHadithDetail = { _ ->
-                        // Hooked up in Phase 4
-                    }
-                )
-            }
-            NoorNavTab.QURAN -> {
-                TabPlaceholderScreen(
-                    title = "The Holy Quran",
-                    subtitle = "Phase 3: Surah & Juz lists, ayah-by-ayah reader, Amiri typography & audio recitation.",
-                    onShowDesignShowcase = { showDesignShowcase = true }
-                )
-            }
-            NoorNavTab.HADITH -> {
-                TabPlaceholderScreen(
-                    title = "Sahih Hadith Collections",
-                    subtitle = "Phase 4: Sahih al-Bukhari & Sahih Muslim authentic books, chapters & gradings.",
-                    onShowDesignShowcase = { showDesignShowcase = true }
-                )
-            }
-            NoorNavTab.SAVED -> {
-                TabPlaceholderScreen(
-                    title = "Saved & Bookmarks",
-                    subtitle = "Phase 5: Custom collections, personal notes, offline search & SAF JSON backup.",
-                    onShowDesignShowcase = { showDesignShowcase = true }
-                )
-            }
-            NoorNavTab.MORE -> {
-                TabPlaceholderScreen(
-                    title = "More & Settings",
-                    subtitle = "Phase 6: Language switcher, theme tokens, Hisnul Muslim Duas, Tasbih & offline Hijri calendar.",
-                    onShowDesignShowcase = { showDesignShowcase = true }
-                )
+        Crossfade(targetState = currentTab, label = "tabCrossfade") { tab ->
+            when (tab) {
+                NoorNavTab.TODAY -> {
+                    TodayScreen(
+                        onNavigateToSearch = {
+                            // Phase 5 Search
+                        },
+                        onNavigateToVerseDetail = { contentId ->
+                            // Open in reader
+                        },
+                        onNavigateToSurahReader = { surah, ayah ->
+                            currentTab = NoorNavTab.QURAN
+                            activeReaderTarget = Pair(surah, ayah)
+                        },
+                        onNavigateToHadithDetail = { _ ->
+                            // Phase 4 Hadith
+                        }
+                    )
+                }
+                NoorNavTab.QURAN -> {
+                    QuranScreen(
+                        onNavigateToSurahReader = { surah, ayah ->
+                            activeReaderTarget = Pair(surah, ayah)
+                        }
+                    )
+                }
+                NoorNavTab.HADITH -> {
+                    TabPlaceholderScreen(
+                        title = "Sahih Hadith Collections",
+                        subtitle = "Phase 4: Sahih al-Bukhari & Sahih Muslim authentic books, chapters & gradings.",
+                        onShowDesignShowcase = { showDesignShowcase = true }
+                    )
+                }
+                NoorNavTab.SAVED -> {
+                    TabPlaceholderScreen(
+                        title = "Saved & Bookmarks",
+                        subtitle = "Phase 5: Custom collections, personal notes, offline search & SAF JSON backup.",
+                        onShowDesignShowcase = { showDesignShowcase = true }
+                    )
+                }
+                NoorNavTab.MORE -> {
+                    TabPlaceholderScreen(
+                        title = "More & Settings",
+                        subtitle = "Phase 6: Language switcher, theme tokens, Hisnul Muslim Duas, Tasbih & offline Hijri calendar.",
+                        onShowDesignShowcase = { showDesignShowcase = true }
+                    )
+                }
             }
         }
 
         // Floating Glass Bottom Navigation Bar
         FloatingGlassNavBar(
             selectedTab = currentTab,
-            onTabSelected = { currentTab = it },
+            onTabSelected = {
+                currentTab = it
+                activeReaderTarget = null
+            },
             modifier = Modifier.align(Alignment.BottomCenter)
         )
     }

@@ -8,20 +8,29 @@ All spiritual scripture and text within **Poswal Noor** are derived strictly fro
 
 | Component | Source / Authority | License / Terms | Reference / URL |
 | :--- | :--- | :--- | :--- |
-| **Arabic Uthmani Script** | **Tanzil Project** & King Fahd Quran Complex (Hafs 'an 'Asim) | Public Domain / Tanzil Standard Terms (Free for non-commercial and educational use) | [http://tanzil.net](http://tanzil.net) |
+| **Arabic Uthmani Script** | **Tanzil Project** & King Fahd Quran Complex (Hafs 'an 'Asim) | Creative Commons Attribution 3.0 (CC-BY 3.0) / Tanzil Standard Terms | [http://tanzil.net](http://tanzil.net) |
 | **English Translation** | **Sahih International** (Umm Muhammad, Aminah Assami, Maryam Kennedy) | Open / Permissive Distribution | [Tanzil.net](http://tanzil.net/trans/) |
 | **Hindi Translation** | **Dr. Suhel Farooq Khan & Prof. Farooq Khan** | Permissive Educational / Tanzil Project | [Tanzil.net](http://tanzil.net/trans/) |
 | **Urdu Translation** | **Maulana Muhammad Junagarhi** | Public Domain / Tanzil Project | [Tanzil.net](http://tanzil.net/trans/) |
-| **Hinglish (Roman Urdu / Hindi)** | Curated verified romanizations (with automatic English fallback + indicator tag when unlicensed) | In-House Verified Non-commercial | Poswal Noor Local Asset |
+| **Hinglish (Roman Urdu / Hindi)** | 0% database coverage — currently defaults 100% to English fallback with UI badge | In Development | Poswal Noor Local Asset |
+
+### 📌 Tanzil Project Attribution & Terms (For About Screen)
+```text
+The Holy Quran Arabic text and verified translations provided by Tanzil Project (tanzil.net).
+Copyright © 2007-2024 Tanzil Project.
+License: Creative Commons Attribution 3.0 Unported (CC-BY 3.0).
+Users may freely read, quote, and distribute this verified scripture.
+Special thanks to the Tanzil Project contributors and the King Fahd Quran Printing Complex.
+```
 
 ---
 
 ## 2. Hadith Collections (كتب الحديث الشريف) — 14,060 Records
 
-| Collection | Source / Dataset | Records | Translation Authority | Grading / Verification |
+| Collection | Dataset Name & Origin | Records | Translation Authority | License & Upstream URL |
 | :--- | :--- | :--- | :--- | :--- |
-| **Sahih al-Bukhari (صحيح البخاري)** | Fawaz Ahmed Hadith Open API / Sunnah.com dump | **7,050** | M. Muhsin Khan (English) | **Sahih** (Muttafaqun 'Alayh) |
-| **Sahih Muslim (صحيح مسلم)** | Fawaz Ahmed Hadith Open API / Sunnah.com dump | **7,010** | Abdul Hamid Siddiqui (English) | **Sahih** |
+| **Sahih al-Bukhari (صحيح البخاري)** | **`hadith-api`** (Fawaz Ahmed Hadith API / Sunnah.com dump) | **7,050** | M. Muhsin Khan (English) | **Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA 4.0)**<br>URL: [https://github.com/fawazahmed0/hadith-api](https://github.com/fawazahmed0/hadith-api)<br>Edition: `eng-bukhari.json` |
+| **Sahih Muslim (صحيح مسلم)** | **`hadith-api`** (Fawaz Ahmed Hadith API / Sunnah.com dump) | **7,010** | Abdul Hamid Siddiqui (English) | **Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA 4.0)**<br>URL: [https://github.com/fawazahmed0/hadith-api](https://github.com/fawazahmed0/hadith-api)<br>Edition: `eng-muslim.json` |
 
 ---
 
