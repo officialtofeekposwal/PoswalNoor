@@ -14,7 +14,7 @@
 [![Release: v2.0.0](https://img.shields.io/badge/Release-v2.0.0-0F4C3A.svg)](https://github.com/officialtofeekposwal/PoswalNoor/releases/tag/v2.0.0)
 [![Build Status](https://img.shields.io/badge/Build-Passing-0F4C3A.svg)](#)
 
-[Download Latest APK (v2.0.0)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v2.0.0/app-debug.apk) • [Changelog](CHANGELOG.md) • [Data Sources](DATA_SOURCES.md) • [Architecture](#architecture--project-structure)
+[Download Latest APK (v2.0.0)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v2.0.0/PoswalNoor-v2.0.0-debug.apk) • [Changelog](CHANGELOG.md) • [Data Sources](DATA_SOURCES.md) • [Architecture](#architecture--project-structure)
 
 </div>
 
