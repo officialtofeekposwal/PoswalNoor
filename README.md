@@ -1,241 +1,339 @@
 <div align="center">
 
-# 🌙 Poswal Noor (نور)
-### The Complete, 100% Offline-First Islamic Companion for Android
+<br/>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/officialtofeekposwal/PoswalNoor/main/docs/screenshots/widget_preview.jpg" alt="Poswal Noor Preview" width="340" style="border-radius: 24px; box-shadow: 0 12px 32px rgba(0,0,0,0.35);" />
-</p>
+# ﷽
 
-**Authentic Holy Quran • Sahih Hadiths • Glance Home Screen Widgets • Apple-Inspired Liquid Glass UI**  
-*Zero Internet • Zero Analytics • Zero Ads • Complete Spiritual Solace*
+<h1>
+  <sub>🌙</sub> Poswal Noor <sub>(نور)</sub>
+</h1>
 
----
+### The complete, 100% offline Islamic companion for Android.
+*Quran · Sahih Hadith · Dhikr · Qibla · Prayer Times · Home Screen Widgets — with zero internet permission.*
 
-[![Release: v2.0.0](https://img.shields.io/badge/Release-v2.0.0_Master_Edition-0F4C3A.svg?style=for-the-badge&logo=github)](https://github.com/officialtofeekposwal/PoswalNoor/releases/tag/v2.0.0)
-[![Direct APK Download](https://img.shields.io/badge/Download_APK-27.65_MB-C9A24B.svg?style=for-the-badge&logo=android)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v2.0.0/PoswalNoor-v2.0.0-debug.apk)
-[![License: MIT](https://img.shields.io/badge/License-MIT-0F4C3A.svg?style=for-the-badge)](LICENSE)
+<br/>
 
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-7F52FF.svg?logo=kotlin&logoColor=white)](https://kotlinlang.org)
-[![Jetpack Compose](https://img.shields.io/badge/Jetpack_Compose-Material_3-4285F4.svg?logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
-[![Jetpack Glance](https://img.shields.io/badge/Glance_Widgets-1.1.0-34A853.svg?logo=android&logoColor=white)](https://developer.android.com/jetpack/androidx/releases/glance)
-[![Min SDK](https://img.shields.io/badge/Min_SDK-26_(Android_8.0+)-EA4335.svg?logo=android)](https://developer.android.com)
-[![Zero Network](https://img.shields.io/badge/Permissions-ZERO_INTERNET-0F4C3A.svg)](https://github.com/officialtofeekposwal/PoswalNoor)
+<a href="https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v2.0.0/PoswalNoor-v2.0.0-debug.apk">
+  <img src="https://img.shields.io/badge/⬇_DOWNLOAD_APK-v2.0.0_·_27.65_MB-C9A24B?style=for-the-badge&labelColor=0F4C3A" alt="Download APK"/>
+</a>
 
-[📥 Download APK (v2.0.0)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v2.0.0/PoswalNoor-v2.0.0-debug.apk) • [✨ Features](#-key-features--capabilities) • [📱 Widgets](#-jetpack-glance-home-screen-widgets) • [💎 Liquid Glass UI](#-apple-inspired-liquid-glass-ui-suite) • [🏛️ Architecture](#-system-architecture) • [📜 Content Sources](#-authentic-scripture-sources)
+<br/><br/>
+
+<img src="https://img.shields.io/badge/Internet_Permission-NONE-0F4C3A?style=flat-square&labelColor=0C0E14" alt="No Internet"/>
+<img src="https://img.shields.io/badge/Telemetry-ZERO-C9A24B?style=flat-square&labelColor=0C0E14" alt="Zero Telemetry"/>
+<img src="https://img.shields.io/badge/Ads-NONE-0F4C3A?style=flat-square&labelColor=0C0E14" alt="No Ads"/>
+<img src="https://img.shields.io/badge/Records-20,296-C9A24B?style=flat-square&labelColor=0C0E14" alt="20,296 Records"/>
+<img src="https://img.shields.io/badge/Android-8.0+-0F4C3A?style=flat-square&logo=android&logoColor=C9A24B&labelColor=0C0E14" alt="Android 8.0+"/>
+<img src="https://img.shields.io/badge/Kotlin-2.0.21-C9A24B?style=flat-square&logo=kotlin&logoColor=C9A24B&labelColor=0C0E14" alt="Kotlin"/>
+<img src="https://img.shields.io/badge/License-MIT-0F4C3A?style=flat-square&labelColor=0C0E14" alt="MIT License"/>
+
+<br/><br/>
+
+[**Download**](#-download) &nbsp;·&nbsp;
+[**Features**](#-features) &nbsp;·&nbsp;
+[**Widgets**](#-home-screen-widgets) &nbsp;·&nbsp;
+[**Architecture**](#-architecture) &nbsp;·&nbsp;
+[**Build**](#-build-from-source) &nbsp;·&nbsp;
+[**Credits**](#-content-licensing--attribution)
+
+<br/>
 
 </div>
 
 ---
 
-## 📖 Philosophy & Vision
+## 🕌 Why Poswal Noor?
 
-**Poswal Noor (نور)** is built to restore tranquility in the digital age. Most contemporary Islamic applications are bloated with intrusive banner ads, commercial trackers, pushy subscriptions, and internet-dependent services that sell user attention.
+Most Islamic apps ask for the internet, location, analytics, and an account — before you can read a single verse.
 
-Poswal Noor takes a radically different path:
-1. **100% Offline-First**: Contains a pre-packaged 15.55 MB verified SQLite database with **20,296 scripture records**. `android.permission.INTERNET` is not even declared in the `AndroidManifest.xml`.
-2. **Zero Distractions**: No ads, no third-party telemetry, no paywalls.
-3. **Pure Craftsmanship**: Engineered with **Kotlin 2.0**, **Jetpack Compose**, **Material 3**, and our proprietary **Apple-Inspired Liquid Glass UI Engine**.
-4. **Authenticity Without Compromise**: Zero AI-generated or hallucinated scriptures. Every ayah and hadith is cross-referenced from verified open databases (Tanzil & Sahih Hadith collections).
+**Poswal Noor asks for none of it.**
 
----
+> The app does **not** declare `android.permission.INTERNET` in its `AndroidManifest.xml`.
+> It is *physically impossible* for it to send or receive data over a network.
 
-## ✨ Key Features & Capabilities
+Everything — the Quran, 14,060 Hadiths, prayer times, Qibla — lives on your device and works in airplane mode, in the mosque, in the mountains, anywhere.
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       POSWAL NOOR (v2.0.0 MASTER EDITION)                  │
-├──────────────────────────┬──────────────────────────┬───────────────────────┤
-│ 📚 Scripture Reservoir   │ 💎 Design & Motion       │ 🧭 Offline Utilities  │
-│ • 6,236 Quran Ayahs      │ • Liquid Glass Engine    │ • 3D Qibla Compass    │
-│ • 14,060 Sahih Hadiths   │ • Frosted Blurs & AGSL   │ • Solar Prayer Times  │
-│ • 114 Surahs Full Reader │ • Spring Physics Pills   │ • Digital Dhikr Dial  │
-│ • Diacritic Search       │ • OLED Deep Black Theme  │ • Hijri Calendar      │
-│ • No-Repeat Feed Engine  │ • Amiri & Nastaliq Fonts │ • 1080p Card Exporter │
-└──────────────────────────┴──────────────────────────┴───────────────────────┘
-```
-
-### 1. 📚 Complete Holy Quran Reader & Surah Catalog
-- **All 114 Surahs**: Complete Quranic catalog featuring ornate Makki/Madani badges, Arabic calligraphy titles, English meanings, and ayah totals.
-- **Continuous Reading Experience**: Fluid vertical scroll with Bismillah calligraphy headers, numbered ayah medallions, and customizable typography.
-- **Auto-Persistence**: Remembers your exact reading spot across sessions with a 1-tap "Continue Reading" banner.
-
-### 2. 📜 Complete Sahih Hadith Browser
-- **14,060 Authentic Narrations**:
-  - **7,050** Hadiths from **Sahih al-Bukhari** (صحيح البخاري)
-  - **7,010** Hadiths from **Sahih Muslim** (صحيح مسلم)
-- **Scholarly Verification**: Every record includes chapter titles, book indices, hadith reference numbers, primary narrators, and authenticity gradings.
-
-### 3. 🔄 Mathematical Deterministic No-Repeat Feed Engine
-- Solves the repetition bug found in standard apps. An intelligent **Room Paging 3** engine powered by Linear Congruential pseudo-random scoring:
-  $$\text{Score} = ((\text{id} \times 1103515245 + \text{seed}) \ \& \ 2147483647)$$
-- Items maintain deterministic positions across screen rotations, while pulling-to-refresh seeds a fresh journey.
-- **Seen History Tracker**: Automatically tracks viewed cards after 1 second of dwell time and prevents repeats across hundreds of swipes.
-
-### 4. 🔍 100% Offline Scripture Search
-- Real-time search engine scanning all 20,296 records with zero latency.
-- **Diacritic-Tolerant & Arabic Normalized**: Search seamlessly in Arabic (Uthmani or simplified), English, Hindi, or Urdu without getting blocked by diacritics (Tashkeel).
-
-### 5. 🤲 Hisnul Muslim (Fortress of the Muslim) & Daily Duas
-- Handpicked authentic supplications organized by time and situation: Morning & Evening, After Prayer, Forgiveness, and Times of Distress.
-- **Interactive Repetition Counters**: Built-in 3x, 33x, and 100x target circles with gentle haptic pulse feedback on each tap.
-
-### 6. 📿 Digital Tasbih / Dhikr Counter
-- **310dp Immersive Dial**: Tactile counter with animated circular sweep gradients and smooth spring recovery.
-- **Tactile Haptic Feedback**: Distinct vibration bursts for single clicks and lap milestones.
-- **Built-in Presets**: SubhanAllah, Alhamdulillah, Allahu Akbar, Astaghfirullah, and custom targets with lifetime stats.
-
-### 7. 🧭 Offline Sensor Qibla Compass & Astronomical Prayer Times
-- **3D Sensor Compass**: Employs the device's hardware rotation vector sensor to point towards the Kaaba ($21.4225^\circ\text{ N}, 39.8262^\circ\text{ E}$) with live visual alignment lock ($\pm 4^\circ$).
-- **Solar Astronomical Prayer Calculation**: Calculates Fajr, Sunrise, Dhuhr, Asr (Standard / Hanafi), Maghrib, and Isha using solar elevation formulas on-device.
-- **Zero Location Permissions Required**: Includes a built-in offline database of 40+ major global cities, allowing complete operation without location access.
-
-### 8. 📅 Algorithmic Hijri Calendar
-- On-device astronomical conversion from Gregorian to Islamic Hijri dates.
-- Highlights prominent Islamic dates including Ramadan, Eid al-Fitr, Eid al-Adha, Day of Arafah, and Ashura.
-
-### 9. 🖼️ Social Share as Styled Luxury Image Card
-- Generates high-resolution **1080 × 1350 Instagram / WhatsApp-ready image cards**.
-- Rendered offscreen with deep emerald gradients, geometric gold Islamic borders, and bundled Amiri calligraphy—shared instantly via secure `FileProvider`.
-
----
-
-## 📱 Jetpack Glance Home Screen Widgets
-
-Transform your phone's home screen into an uplifting spiritual sanctuary with 4 specialized Glance widgets:
-
-| Widget Layout | Description | Interactive Controls |
-| :--- | :--- | :--- |
-| **4x2 Banner** | Wide reflection card displaying daily ayah/hadith with full translation and citation | 1-tap refresh button & deep link to reflection reader |
-| **4x3 Magazine** | Expanded layout with Arabic calligraphy, localized translation, and theme chip | 1-tap refresh, bookmark shortcut & deep link |
-| **2x2 Compact Verse** | Minimalist daily verse card designed for clean home screen setups | Deep link to reflection detail |
-| **2x2 Launcher Tasbih** | Interactive launcher widget to perform dhikr directly from your home screen | Tap `+` counter without launching the app (`ActionCallback`) |
-
-> **1-Tap Pinning**: Add any widget directly from inside the app's top bar or settings using Android's native `AppWidgetManager.requestPinAppWidget`.
-
----
-
-## 💎 Apple-Inspired Liquid Glass UI Suite
-
-Poswal Noor features a bespoke design system created exclusively for modern Android:
-
-* **Frosted Translucency**: High-performance multi-layered background blur with graceful solid-surface fallback on older Android devices.
-* **Liquid Borders**: Subtle white inner highlights ($0.5\text{dp} - 1.5\text{dp}$) replicating premium Apple frosted-glass edges.
-* **AGSL Lens Refraction Shader**: Custom Android Graphics Shading Language shader on Android 13+ (API 33+) simulating real light refraction.
-* **OLED Deep Night Palette**: Deep Obsidian Black (`#0C0E14`) paired with Imperial Emerald (`#0F4C3A`) and Sand Gold (`#C9A24B`).
-* **Haptic & Spring Motion**: Segmented sliding pill filters with spring physics (`dampingRatio = 0.8f`, `stiffness = 380f`).
-
----
-
-## 🔤 Bundled Offline Typography
-
-No network downloads needed. All fonts are bundled directly in the APK under the SIL Open Font License (OFL):
-
-* 🇸🇦 **Arabic:** [Amiri (Regular & Bold)](https://fonts.google.com/specimen/Amiri) — Renowned classical Naskh typeface designed for exquisite Quranic reading.
-* 🇵🇰 **Urdu:** [Noto Nastaliq Urdu](https://fonts.google.com/noto/specimen/Noto+Nastaliq+Urdu) — Authentic Nastaliq script with full bi-directional RTL support.
-* 🇮🇳 **Hindi:** [Noto Sans Devanagari](https://fonts.google.com/noto/specimen/Noto+Sans+Devanagari) — Clean, legible modern Devanagari typography.
-* 🇬🇧 **English & Hinglish:** Inter / Roboto with Material 3 typography tokens.
-
----
-
-## 🏛️ System Architecture
-
-Poswal Noor follows modern Android architectural guidelines (**Clean Architecture + MVVM + UDF + Hilt + Room**):
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        UI LAYER (Jetpack Compose)                      │
-│   HomeScreen  •  QuranReader  •  HadithBrowser  •  Tasbih  •  Qibla    │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    │ StateFlow / UI Events
-┌───────────────────────────────────▼────────────────────────────────────┐
-│                    VIEWMODEL LAYER (AAC ViewModels)                    │
-│   HomeViewModel  •  QuranViewModel  •  TasbihViewModel  •  DuaVM       │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    │ Coroutines / Kotlin Flow
-┌───────────────────────────────────▼────────────────────────────────────┐
-│                       DOMAIN LAYER (Use Cases)                         │
-│   GetNoRepeatFeedUseCase  •  SearchScripture  •  CalculatePrayerTimes  │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    │ Repositories
-┌───────────────────────────────────▼────────────────────────────────────┐
-│                   DATA LAYER (Dual-Database Isolation)                 │
-│  ┌───────────────────────────────┐   ┌──────────────────────────────┐  │
-│  │     poswal_noor.db (Asset)    │   │      poswal_user.db (User)   │  │
-│  │ • 6,236 Ayahs                 │   │ • Saved Bookmarks & Folders  │  │
-│  │ • 14,060 Sahih Hadiths        │   │ • Seen Items History (Feed)  │  │
-│  │ • 114 Surahs Metadata         │   │ • Personal Reflection Notes  │  │
-│  │ • Read-Only Pre-Packaged      │   │ • Offline JSON Export/Import │  │
-│  └───────────────────────────────┘   └──────────────────────────────┘  │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 📦 Download & Installation
-
-### Option 1: Direct APK Download (Recommended)
-1. Download the latest release: **[PoswalNoor-v2.0.0-debug.apk](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v2.0.0/PoswalNoor-v2.0.0-debug.apk)** *(27.65 MB)*.
-2. Open the downloaded file on your Android device (Android 8.0+ / API 26+).
-3. If prompted, enable *"Install from unknown sources"*.
-
-### Option 2: Build from Source
-```bash
-# 1. Clone the repository
-git clone https://github.com/officialtofeekposwal/PoswalNoor.git
-cd PoswalNoor
-
-# 2. Run unit & integrity tests
-./gradlew testDebugUnitTest
-
-# 3. Compile debug APK
-./gradlew assembleDebug
-
-# Output APK path:
-# app/build/outputs/apk/debug/app-debug.apk
-```
-
----
-
-## 📜 Authentic Scripture Sources
-
-To safeguard religious sanctity, **no scripture text is generated, altered, or hallucinated by AI**. All data is imported via reproducible scripts (`tools/build_content_db.py`) from accredited open-source repositories:
-
-| Scripture Domain | Source / Authority | License | Records |
-| :--- | :--- | :--- | :--- |
-| **Holy Quran (Arabic)** | [Tanzil Project](https://tanzil.net) (Uthmani Text) | Creative Commons / Tanzil License | 6,236 Ayahs |
-| **Quran English Translation** | Sahih International | Open Access / Public | 6,236 Ayahs |
-| **Quran Hindi Translation** | Muhammad Farooq Khan & Ahmad | Open Access | 6,236 Ayahs |
-| **Quran Urdu Translation** | Maulana Fateh Muhammad Jalandhari | Public Domain | 6,236 Ayahs |
-| **Sahih al-Bukhari** | Sahih al-Bukhari verified dataset | Open Database / Educational | 7,050 Hadiths |
-| **Sahih Muslim** | Sahih Muslim verified dataset | Open Database / Educational | 7,010 Hadiths |
-
-*Full details and licenses are documented in [DATA_SOURCES.md](DATA_SOURCES.md).*
-
----
-
-## 🔒 Absolute Privacy Guarantee
-
-- 🚫 **No `android.permission.INTERNET`**: The app cannot make network calls even if it wanted to.
-- 🚫 **Zero Third-Party SDKs**: No Google Firebase, Facebook SDK, Adjust, Flurry, or ad frameworks.
-- 🚫 **No Analytics**: Zero event tracking, crash beacons, or screen recording.
-- 🚫 **No Account Required**: No logins, email registrations, or phone numbers.
-- 💾 **Local Data Portability**: Export your bookmarks and reflections anytime via standard JSON files using Android's native Storage Access Framework (SAF).
-
----
-
-## 👨‍💻 Author & Maintainer
+<br/>
 
 <div align="center">
 
-Crafted with dedication by **[Tofeek Poswal](https://github.com/officialtofeekposwal)**  
-📧 Contact: `workwithtofeek@gmail.com`  
-🐙 GitHub: [@officialtofeekposwal](https://github.com/officialtofeekposwal)
+| 🔒 **Privacy** | 📖 **Authenticity** | 💎 **Design** |
+|:---:|:---:|:---:|
+| No internet permission.<br/>No Firebase, analytics, ads or crash beacons. | Zero AI-generated scripture.<br/>Every record is cross-verified and cited. | Apple-inspired *Liquid Glass* UI<br/>in Obsidian, Gold & Emerald. |
+
+</div>
 
 ---
 
-### 📄 License
-This project is open-source under the terms of the [MIT License](LICENSE).  
-*May this work serve as a continuous benefit (Sadaqah Jariyah) for everyone seeking spiritual remembrance.*
+## ⬇ Download
+
+<div align="center">
+
+<a href="https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v2.0.0/PoswalNoor-v2.0.0-debug.apk">
+  <img src="https://img.shields.io/badge/INSTALL_NOW-PoswalNoor--v2.0.0--debug.apk-C9A24B?style=for-the-badge&logo=android&logoColor=0C0E14&labelColor=0F4C3A" alt="Install"/>
+</a>
+
+| | |
+|---|---|
+| **Version** | `v2.0.0` — Master Edition |
+| **Size** | 27.65 MB |
+| **Requires** | Android 8.0 (API 26) or higher |
+| **Release notes** | [View on GitHub Releases](https://github.com/officialtofeekposwal/PoswalNoor/releases/tag/v2.0.0) |
+
+</div>
+
+> **How to install:** download the APK → open it → allow *"Install from unknown sources"* for your browser or file manager if prompted → install.
+
+---
+
+## ✨ Features
+
+### 📚 Scripture Reservoir — 20,296 authentic records
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+#### 🌙 The Holy Quran
+**6,236 Ayahs · 114 Surahs**
+
+- Tanzil Project **Uthmani** Arabic script
+- Translations in **English** (Sahih International), **Hindi** (Farooq Khan) and **Urdu** (Jalandhari)
+- Surah catalog with **Makki / Madani** badges, English meanings and ayah counts
+- Continuous vertical reader with Bismillah headers
+- Auto-bookmark with **Continue Reading**
+
+</td>
+<td width="50%" valign="top">
+
+#### 📜 Sahih Hadith
+**14,060 records**
+
+- **7,050** from *Sahih al-Bukhari* — صحيح البخاري
+- **7,010** from *Sahih Muslim* — صحيح مسلم
+- Scholar grading, book numbers and narrator chains on every record
+
+</td>
+</tr>
+</table>
+
+#### 🔎 Instant offline search
+Real-time search across all 20,296 records with no latency, no server. It is **diacritic-tolerant** (ignores Tashkeel — Zabar, Zer, etc.) and **Arabic-normalized**, so you find what you mean, not just what you typed.
+
+---
+
+### 🔄 Deterministic No-Repeat Feed Engine
+
+Most feeds loop the same 10–15 cards. Poswal Noor doesn't.
+
+Built on **AndroidX Room + Paging 3** with a Linear Congruential Generator for stable pseudo-random ordering:
+
+```kotlin
+Score = ((id * 1103515245 + seed) & 2147483647)
+```
+
+- ✅ No repeats while scrolling
+- ✅ Scroll position survives device rotation
+- ✅ Clean reshuffle on pull-to-refresh
+- ✅ Smart **view-dwell tracking** — a card counts as "seen" only after 1 second on screen
+
+---
+
+### 🤲 Daily Spiritual Essentials
+
+| Feature | What it does |
+|---|---|
+| **Hisnul Muslim & Duas** | Morning/Evening, After Salah, Forgiveness and Hardship supplications with repetition counters (3× / 33× / 100×) and haptic ticks |
+| **Digital Tasbih** | Giant 310dp circular dial, animated sweep-gradient progress ring, haptic feedback and lifetime counts |
+| **Offline Qibla Compass** | Uses the hardware rotation-vector sensor toward the Kaaba (21.4225° N, 39.8262° E) with a live **±4° alignment lock** |
+| **Offline Prayer Times** | Solar-elevation astronomy for Fajr, Sunrise, Dhuhr, Asr (Hanafi / Shafi'i), Maghrib and Isha. **40+ built-in global cities** — no GPS or location permission |
+| **Hijri Calendar** | Algorithmic Gregorian → Hijri converter with Islamic holiday highlights |
+| **Luxury Image Cards** | Exports **1080×1350** emerald-and-gold quote cards with Amiri calligraphy, shared straight to WhatsApp / Instagram via `FileProvider` |
+
+---
+
+## 📱 Home Screen Widgets
+
+Powered by **Jetpack Glance 1.1.0**. Pin any of them in one tap from the app's top bar (`AppWidgetManager.requestPinAppWidget`).
+
+| Widget | Size | Best for |
+|---|:---:|---|
+| 🪧 **Banner** | `4×2` | Wide daily reflection card with 1-tap refresh and app deep link |
+| 📰 **Magazine** | `4×3` | Rich typography: Arabic calligraphy, translation and topic tags |
+| 🌿 **Compact Verse** | `2×2` | A minimalist daily verse for clean home screens |
+| 📿 **Launcher Tasbih** | `2×2` | Tap to count dhikr **right from the home screen** — no need to open the app (`ActionCallback`) |
+
+---
+
+## 💎 Liquid Glass Design System
+
+<table>
+<tr>
+<td width="55%" valign="top">
+
+- **Frosted translucency** — multi-layered background blur, with a graceful solid-surface fallback on older Android versions
+- **Inner specular border** — delicate 0.5–1.5dp white highlights that echo Apple's liquid-glass look
+- **AGSL lens-refraction shader** on Android 13+ (API 33+)
+- **Spring motion** — sliding pill filters with spring physics (`dampingRatio = 0.8f`)
+
+</td>
+<td width="45%" valign="top">
+
+**OLED Night Palette**
+
+| | Name | Hex |
+|:-:|---|---|
+| ⬛ | Deep Obsidian Black | `#0C0E14` |
+| 🟨 | Sand Gold | `#C9A24B` |
+| 🟩 | Imperial Emerald | `#0F4C3A` |
+
+</td>
+</tr>
+</table>
+
+### 🔤 Bundled offline typography *(SIL OFL)*
+
+| Script | Typeface | Notes |
+|---|---|---|
+| **Arabic** | Amiri (Regular & Bold) | Classical Naskh Quranic typeface |
+| **Urdu** | Noto Nastaliq Urdu | Authentic Nastaliq with full bi-directional RTL support |
+| **Hindi** | Noto Sans Devanagari | Modern, legible Devanagari |
+| **English / Hinglish** | Inter / Roboto | Material 3 typography tokens |
+
+---
+
+## 🛡 Privacy & Integrity Guarantees
+
+1. **Zero internet** — no `INTERNET` permission, ever.
+2. **Zero telemetry** — no Firebase, analytics, ads, crash beacons or third-party data harvesting.
+3. **Dual-database isolation** — your data can never be wiped by an update:
+
+   | Database | Purpose | Access |
+   |---|---|---|
+   | `poswal_noor.db` | Quran & Hadith content | Pre-packaged, **read-only** |
+   | `poswal_user.db` | Bookmarks, reading history, notes | Local Room DB, user-owned |
+
+4. **Authenticity guarantee** — no AI-generated or hallucinated scripture. Quran text comes from the Tanzil Uthmani source; Hadith records come from verified Sahih datasets, with citations.
+
+---
+
+## 🏗 Architecture
+
+```mermaid
+flowchart TD
+    subgraph UI["🎨 Presentation"]
+        A["Jetpack Compose + Material 3"]
+        W["Jetpack Glance Widgets"]
+    end
+
+    subgraph LOGIC["⚙️ Logic"]
+        B["ViewModels · StateFlow · UDF"]
+        P["Paging 3 · LCG No-Repeat Engine"]
+        J["WorkManager · Daily Verse"]
+    end
+
+    subgraph DATA["💾 Data (100% on-device)"]
+        C[("poswal_noor.db<br/>read-only content")]
+        D[("poswal_user.db<br/>bookmarks · history · notes")]
+        E["DataStore<br/>preferences"]
+    end
+
+    A --> B
+    W --> B
+    B --> P
+    P --> C
+    B --> D
+    B --> E
+    J --> C
+
+    H{{"Dagger Hilt + KSP"}} -.injects.-> B
+
+    style UI fill:#0C0E14,stroke:#C9A24B,color:#C9A24B
+    style LOGIC fill:#0C0E14,stroke:#0F4C3A,color:#ffffff
+    style DATA fill:#0F4C3A,stroke:#C9A24B,color:#ffffff
+```
+
+### 🧰 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Language** | Kotlin `2.0.21` |
+| **UI** | Jetpack Compose + Material 3 |
+| **Widgets** | Jetpack Glance `1.1.0` (`glance-appwidget`, `glance-material3`) |
+| **Database** | SQLite via AndroidX Room `2.6.1` — dual DB (Asset + User) |
+| **Pagination** | Paging 3 (`paging-runtime-ktx`, `paging-compose`, `room-paging`) |
+| **DI** | Dagger Hilt `2.51.1` + KSP |
+| **Async & state** | Coroutines · StateFlow · Unidirectional Data Flow |
+| **Background** | WorkManager `2.9.1` (scheduled daily-verse notifications) |
+| **Preferences** | Jetpack DataStore `1.1.1` |
+| **Platform** | Min SDK 26 (Android 8.0+) · Target / Compile SDK 34 / 35 |
+| **Testing** | JUnit 4 — `ContentDatabaseIntegrityTest`, `NoRepeatEngineTest` (0 failures) |
+
+---
+
+## 🔧 Build from Source
+
+**Prerequisites:** Android Studio (latest stable), JDK 17+ recommended, Android SDK 34/35.
+
+```bash
+# 1. Clone
+git clone https://github.com/officialtofeekposwal/PoswalNoor.git
+cd PoswalNoor
+
+# 2. Build the debug APK
+./gradlew assembleDebug
+
+# 3. (Optional) Run the unit tests
+./gradlew test
+```
+
+Your APK will be at:
+
+```
+app/build/outputs/apk/debug/
+```
+
+> On Windows, use `gradlew.bat assembleDebug`.
+
+---
+
+## 📋 Content Licensing & Attribution
+
+| Content | Source | License |
+|---|---|---|
+| Quran — Arabic | Tanzil Project, Uthmani text | Creative Commons Non-Commercial |
+| Quran — English | Sahih International | Public / Open Access |
+| Quran — Urdu | Fateh Muhammad Jalandhari | Public Domain |
+| Hadith | Sahih al-Bukhari & Sahih Muslim, via verified datasets | — |
+| Fonts | Amiri, Noto Nastaliq Urdu, Noto Sans Devanagari | SIL Open Font License (OFL) |
+
+The application source code is released under the **MIT License**.
+
+---
+
+## 🤝 Contributing & Feedback
+
+Found a typo in a translation, a rendering bug, or have an idea? Please [open an issue](https://github.com/officialtofeekposwal/PoswalNoor/issues) — corrections to scripture text or grading are especially welcome, with a source cited.
+
+---
+
+## 👤 Author
+
+<div align="center">
+
+**Tofeek Poswal**
+
+[![GitHub](https://img.shields.io/badge/GitHub-@officialtofeekposwal-0C0E14?style=for-the-badge&logo=github&logoColor=C9A24B)](https://github.com/officialtofeekposwal)
+[![Email](https://img.shields.io/badge/Email-workwithtofeek@gmail.com-0F4C3A?style=for-the-badge&logo=gmail&logoColor=C9A24B)](mailto:workwithtofeek@gmail.com)
+
+<br/>
+
+*If Poswal Noor benefits you, please ⭐ star the repo and make du'a for everyone who worked on it.*
+
+<br/>
+
+**`0% Online · 100% Offline · 100% Noor`**
+
+<sub>Released under the MIT License · © Tofeek Poswal</sub>
 
 </div>
