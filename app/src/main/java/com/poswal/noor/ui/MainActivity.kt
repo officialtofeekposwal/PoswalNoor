@@ -5,10 +5,12 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,7 +22,11 @@ import com.poswal.noor.core.designsystem.NoorTheme
 import com.poswal.noor.core.designsystem.NoorThemeTokens
 import com.poswal.noor.core.designsystem.components.FloatingGlassNavBar
 import com.poswal.noor.core.designsystem.components.NoorNavTab
+import com.poswal.noor.data.preferences.NoorThemeMode
+import com.poswal.noor.data.preferences.UserPreferencesRepository
+import com.poswal.noor.domain.repository.ContentRepository
 import com.poswal.noor.feature.hadith.HadithScreen
+import com.poswal.noor.feature.more.MoreScreen
 import com.poswal.noor.feature.quran.QuranReaderScreen
 import com.poswal.noor.feature.quran.QuranScreen
 import com.poswal.noor.feature.saved.SavedScreen
@@ -28,21 +34,38 @@ import com.poswal.noor.feature.showcase.DesignShowcaseScreen
 import com.poswal.noor.feature.today.TodayScreen
 import com.poswal.noor.ui.components.TabPlaceholderScreen
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var preferencesRepository: UserPreferencesRepository
+
+    @Inject
+    lateinit var contentRepository: ContentRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
         setContent {
-            NoorTheme {
+            val userPrefs by preferencesRepository.userPreferencesFlow.collectAsState(initial = null)
+            val isDark = when (userPrefs?.themeMode) {
+                NoorThemeMode.LIGHT -> false
+                NoorThemeMode.DARK -> true
+                else -> isSystemInDarkTheme()
+            }
+
+            NoorTheme(darkTheme = isDark) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = NoorThemeTokens.colors.background
                 ) {
-                    MainAppScaffold()
+                    MainAppScaffold(
+                        contentRepository = contentRepository,
+                        preferencesRepository = preferencesRepository
+                    )
                 }
             }
         }
@@ -50,7 +73,10 @@ class MainActivity : AppCompatActivity() {
 }
 
 @Composable
-fun MainAppScaffold() {
+fun MainAppScaffold(
+    contentRepository: ContentRepository,
+    preferencesRepository: UserPreferencesRepository
+) {
     var currentTab by remember { mutableStateOf(NoorNavTab.TODAY) }
     var showDesignShowcase by remember { mutableStateOf(false) }
 
@@ -136,10 +162,9 @@ fun MainAppScaffold() {
                     )
                 }
                 NoorNavTab.MORE -> {
-                    TabPlaceholderScreen(
-                        title = "More & Settings",
-                        subtitle = "Phase 6: Language switcher, theme tokens, Hisnul Muslim Duas, Tasbih & offline Hijri calendar.",
-                        onShowDesignShowcase = { showDesignShowcase = true }
+                    MoreScreen(
+                        contentRepository = contentRepository,
+                        preferencesRepository = preferencesRepository
                     )
                 }
             }

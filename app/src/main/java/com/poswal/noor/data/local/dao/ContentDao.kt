@@ -172,6 +172,10 @@ interface ContentDao {
     @Query("SELECT * FROM content_items WHERE type = 'hadith' AND book = :book ORDER BY CAST(number AS INTEGER) ASC")
     fun getHadithsForBook(book: String): PagingSource<Int, ContentItemEntity>
 
+    // --- Duas (Authentic Quran & Hadith Supplications) ---
+    @Query("SELECT * FROM content_items WHERE topic IN ('dua', 'sabr') ORDER BY id ASC")
+    fun getDuas(): Flow<List<ContentItemEntity>>
+
     // --- Offline Search ---
     @Query(
         """

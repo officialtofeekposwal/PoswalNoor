@@ -67,6 +67,7 @@ interface ContentRepository {
     fun getHadithBooks(collection: String): Flow<List<HadithBookInfo>>
     fun getPagedHadiths(collection: String, bookNumber: Int? = null): Flow<PagingData<ContentItemEntity>>
 
-    // --- Offline Search ---
+    // --- Offline Search & Spiritual Tools ---
     fun searchContent(query: String): Flow<List<ContentItemEntity>>
+    fun getDuas(): Flow<List<ContentItemEntity>>
 }

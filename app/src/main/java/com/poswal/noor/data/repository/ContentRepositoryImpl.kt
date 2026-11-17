@@ -349,8 +349,12 @@ class ContentRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    // --- Offline Search ---
+    // --- Offline Search & Spiritual Tools ---
     override fun searchContent(query: String): Flow<List<ContentItemEntity>> {
         return contentDao.searchContent(query)
+    }
+
+    override fun getDuas(): Flow<List<ContentItemEntity>> {
+        return contentDao.getDuas()
     }
 }

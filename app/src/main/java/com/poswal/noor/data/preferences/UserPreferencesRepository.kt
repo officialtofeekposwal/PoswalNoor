@@ -23,13 +23,21 @@ import javax.inject.Singleton
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "poswal_noor_prefs")
 
+enum class NoorThemeMode(val title: String) {
+    SYSTEM("System Default"),
+    LIGHT("Light (Ivory)"),
+    DARK("Dark (OLED Calm)")
+}
+
 data class UserPreferences(
     val language: AppLanguage,
     val contentType: ContentType,
     val selectedTopics: Set<String>,
     val autoRefreshHours: Int,
     val fontSizeScale: Float,
-    val isOnboardingCompleted: Boolean
+    val isOnboardingCompleted: Boolean,
+    val themeMode: NoorThemeMode = NoorThemeMode.SYSTEM,
+    val tasbihLifetime: Int = 0
 )
 
 @Singleton
@@ -46,6 +54,8 @@ class UserPreferencesRepository @Inject constructor(
         val KEY_LAST_READ_SURAH = intPreferencesKey("last_read_surah")
         val KEY_LAST_READ_AYAH = intPreferencesKey("last_read_ayah")
         val KEY_LAST_READ_SURAH_NAME = stringPreferencesKey("last_read_surah_name")
+        val KEY_THEME_MODE = stringPreferencesKey("theme_mode")
+        val KEY_TASBIH_LIFETIME = intPreferencesKey("tasbih_lifetime")
     }
 
     val lastReadFlow: Flow<Triple<Int, Int, String>> = context.dataStore.data.map { prefs ->
@@ -78,6 +88,9 @@ class UserPreferencesRepository @Inject constructor(
         val refreshHours = prefs[KEY_AUTO_REFRESH_HOURS] ?: 6
         val fontScale = prefs[KEY_FONT_SIZE_SCALE] ?: 1.0f
         val onboarding = prefs[KEY_ONBOARDING_COMPLETED] ?: false
+        val themeModeStr = prefs[KEY_THEME_MODE] ?: NoorThemeMode.SYSTEM.name
+        val themeMode = try { NoorThemeMode.valueOf(themeModeStr) } catch (e: Exception) { NoorThemeMode.SYSTEM }
+        val tasbihLifetime = prefs[KEY_TASBIH_LIFETIME] ?: 0
 
         UserPreferences(
             language = lang,
@@ -85,7 +98,9 @@ class UserPreferencesRepository @Inject constructor(
             selectedTopics = topics,
             autoRefreshHours = refreshHours,
             fontSizeScale = fontScale,
-            isOnboardingCompleted = onboarding
+            isOnboardingCompleted = onboarding,
+            themeMode = themeMode,
+            tasbihLifetime = tasbihLifetime
         )
     }
 
@@ -113,5 +128,20 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setOnboardingCompleted(completed: Boolean) {
         context.dataStore.edit { it[KEY_ONBOARDING_COMPLETED] = completed }
+    }
+
+    suspend fun setThemeMode(themeMode: NoorThemeMode) {
+        context.dataStore.edit { it[KEY_THEME_MODE] = themeMode.name }
+    }
+
+    suspend fun incrementTasbihLifetime(amount: Int = 1) {
+        context.dataStore.edit {
+            val current = it[KEY_TASBIH_LIFETIME] ?: 0
+            it[KEY_TASBIH_LIFETIME] = current + amount
+        }
+    }
+
+    suspend fun resetTasbihLifetime() {
+        context.dataStore.edit { it[KEY_TASBIH_LIFETIME] = 0 }
     }
 }
