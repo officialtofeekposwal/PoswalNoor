@@ -43,6 +43,25 @@ class UserPreferencesRepository @Inject constructor(
         val KEY_AUTO_REFRESH_HOURS = intPreferencesKey("auto_refresh_hours")
         val KEY_FONT_SIZE_SCALE = floatPreferencesKey("font_size_scale")
         val KEY_ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
+        val KEY_LAST_READ_SURAH = intPreferencesKey("last_read_surah")
+        val KEY_LAST_READ_AYAH = intPreferencesKey("last_read_ayah")
+        val KEY_LAST_READ_SURAH_NAME = stringPreferencesKey("last_read_surah_name")
+    }
+
+    val lastReadFlow: Flow<Triple<Int, Int, String>> = context.dataStore.data.map { prefs ->
+        Triple(
+            prefs[KEY_LAST_READ_SURAH] ?: 1,
+            prefs[KEY_LAST_READ_AYAH] ?: 1,
+            prefs[KEY_LAST_READ_SURAH_NAME] ?: "Al-Fatihah"
+        )
+    }
+
+    suspend fun saveLastRead(surah: Int, ayah: Int, surahName: String) {
+        context.dataStore.edit {
+            it[KEY_LAST_READ_SURAH] = surah
+            it[KEY_LAST_READ_AYAH] = ayah
+            it[KEY_LAST_READ_SURAH_NAME] = surahName
+        }
     }
 
     private fun detectDefaultLanguage(): AppLanguage {

@@ -11,10 +11,10 @@
 [![Android](https://img.shields.io/badge/Platform-Android_8.0+_(API_26+)-C9A24B.svg?logo=android)](https://developer.android.com)
 [![Jetpack Compose](https://img.shields.io/badge/Jetpack_Compose-Material_3-0F4C3A.svg?logo=jetpackcompose)](https://developer.android.com/jetpack/compose)
 [![Glance](https://img.shields.io/badge/Jetpack_Glance-1.1.0-C9A24B.svg)](https://developer.android.com/jetpack/androidx/releases/glance)
-[![Release: v1.1.0](https://img.shields.io/badge/Release-v1.1.0-0F4C3A.svg)](https://github.com/officialtofeekposwal/PoswalNoor/releases/tag/v1.1.0)
+[![Release: v2.0.0](https://img.shields.io/badge/Release-v2.0.0-0F4C3A.svg)](https://github.com/officialtofeekposwal/PoswalNoor/releases/tag/v2.0.0)
 [![Build Status](https://img.shields.io/badge/Build-Passing-0F4C3A.svg)](#)
 
-[Download Latest APK (v1.1.0)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v1.1.0/PoswalNoor-v1.1.0-debug.apk) • [Releases](https://github.com/officialtofeekposwal/PoswalNoor/releases) • [Architecture](#architecture--project-structure) • [Getting Started](#getting-started)
+[Download Latest APK (v2.0.0)](https://github.com/officialtofeekposwal/PoswalNoor/releases/download/v2.0.0/app-debug.apk) • [Changelog](CHANGELOG.md) • [Data Sources](DATA_SOURCES.md) • [Architecture](#architecture--project-structure)
 
 </div>
 
@@ -37,41 +37,43 @@ Most contemporary apps are cluttered with intrusive ads, background trackers, an
 
 ---
 
-## ✨ Key Features
+## ✨ Key Features (v2.0.0 Master Edition)
 
-- **⚡ Signature Glance Home Screen Widget (4x2 & 4x3)**:
-  - Displays authentic Quran ayat and Sahih hadiths filtered to concise lengths (`word_count <= 40`) optimal for home screens.
-  - Interactive **Refresh** button for instant random rotation right from the launcher.
-  - **Read more ›** action deep-linking straight into the full scripture detail view.
-  - 1-Tap **"Add Widget to Home Screen"** (`AppWidgetManager.requestPinAppWidget`) built directly into the app.
-- **🌍 5-Language System with Fallback**:
-  - **English (`en`)**
-  - **Hinglish / Roman Urdu & Hindi (`en-IN`)**: Everyday conversational Roman script for South Asian multilingual readers.
-  - **हिन्दी (`hi`)**: Devanagari script.
-  - **اردو (`ur`)**: Nastaliq-tuned RTL layout with relaxed line-height.
-  - **العربية (`ar`)**: Pure pristine Arabic text (automatically omits translation redundancy).
-  - Graceful fallback: when regional translations are unavailable under open licenses, defaults to verified English with a clear indicator tag.
-- **📚 100% Offline-First Database**:
+- **📚 100% Offline Scripture Reservoir (20,296 Authentic Records)**:
   - Pre-packaged SQLite database in Room (`poswal_noor.db`) providing zero-latency startup and zero network reliance.
-  - Authentic Uthmani Quranic text from the **Tanzil Project** and Sahih English from **Sahih International**.
-  - **Sahih al-Bukhari** and **Sahih Muslim** hadiths with verified book numbers, hadith indices, and authenticity gradings.
-- **🏷️ Topic-Based Categorization**:
-  - Filter content across 9 essential life themes: `Namaz`, `Sabr`, `Akhlaq`, `Parents`, `Dua`, `Akhirah`, `Ilm`, `Charity`, `Family`.
-- **💎 Apple-Inspired Liquid Glass UI Suite (v1.1.0)**:
-  - Reusable modular `Modifier.liquidGlass` with physical 5-layer optical styling.
-  - Native hardware blur via `RenderEffect` on Android 12+ (API 31+) with graceful tint fallback on older devices.
-  - Directional refraction border gradient and specular inner highlight simulating physical glass bevel thickness.
-  - Complete glass component suite: `LiquidGlassCard`, tactile `LiquidGlassButton` (spring physics), and floating `LiquidGlassNavBar`.
-  - Advanced AGSL shader (`LiquidGlassShaders.kt`) for realistic chromatic aberration & lens refraction on Android 13+ (API 33).
-- **🎨 Brand Kit & Accessibility-Compliant Theme**:
-  - Handcrafted luxury palette: Emerald (`#0F4C3A`), Deep Emerald (`#0A3427`), Gold (`#C9A24B`), and Ivory (`#F6F1E4`).
-  - Strict WCAG contrast compliance: Gold is never placed as text over Ivory (maintaining >9:1 readable contrast).
-  - Font pairings: **Amiri** for Quranic Arabic, **Fraunces** for headings, and **Inter** for UI body.
-- **⏰ Scheduled Widget Updates**:
-  - Configurable background auto-change interval (1h, 3h, 6h, 12h, 24h) powered by Android Jetpack **WorkManager**.
-- **📋 Native Sharing & Favorites**:
-  - One-tap clipboard copy and Android system Share intents.
-  - Persistent favorite bookmarking stored locally in Room.
+  - **Complete Holy Quran (6,236 Ayahs across all 114 Surahs)** from the **Tanzil Project** in pristine Uthmani text.
+  - **Complete Sahih Hadiths (14,060 Records)**: 7,050 from **Sahih al-Bukhari** and 7,010 from **Sahih Muslim** with verified narrator chains, book numbers, and Sahih gradings.
+  - Dedicated **Dual-Database Architecture**: User data (`poswal_user.db`) is kept completely isolated from content so updates never wipe reading progress or notes.
+- **🔄 Deterministic No-Repeat Paging 3 Engine**:
+  - Infinite scroll feed that never loops the same 10-15 cards.
+  - Mathematical LCG pseudo-random scoring: `((id * 1103515245 + seed) & 2147483647)` ensures stable scrolling across rotation and changes on pull-to-refresh.
+- **📖 Full Quran Reader**:
+  - 114 Surahs catalog with revelation badge (Makkah/Madinah), Arabic calligraphy title, English name, and Ayah count.
+  - Continuous reader with Bismillah calligraphic banner, localized translation, and automatic "Last Read" persistence and resume.
+- **📜 Sahih Hadith Browser**:
+  - Dedicated browser for Sahih al-Bukhari and Sahih Muslim collections.
+- **🔍 100% Offline Scripture Search**:
+  - Diacritic-tolerant instant search across all 20,296 records in Arabic, English, Hindi, and Urdu.
+- **🤲 Hisnul Muslim & Daily Duas**:
+  - Authentic categorized supplications (Morning/Evening, After Prayer, Forgiveness, Hardship) with interactive repetition counters (3x, 33x, 100x).
+- **📿 Digital Tasbih / Dhikr Counter**:
+  - Giant 310dp interactive dial with animated sweep gradient progress ring and tactile haptics.
+- **🧭 100% Offline Qibla Compass & Astronomical Prayer Times**:
+  - Sensor-driven orientation vector compass with live Kaaba bearing indicator and visual alignment lock.
+  - Astronomical solar calculations for Fajr, Sunrise, Dhuhr, Asr (Hanafi/Standard), Maghrib, and Isha.
+  - 40+ preloaded global cities for 100% offline accuracy with zero location permissions required.
+- **📅 Algorithmic Hijri Calendar**:
+  - Gregorian-to-Hijri converter with Arabic & English month names and upcoming Islamic occasions.
+- **🖼️ Share as Styled Image Card**:
+  - Generates 1080x1350 luxury reflection cards with emerald gradients, gold geometric borders, and offline Amiri calligraphy for WhatsApp and social media.
+- **⚡ Glance Home Screen Widget Suite (4x2, 4x3, 2x2 Verse, 2x2 Tasbih)**:
+  - Interactive Glance widgets including dynamic rotating reflections, a compact 2x2 "Verse of the Day" widget, and a 2x2 launcher-based digital Tasbih counter.
+- **🔤 Bundled Offline Typography**:
+  - Bundled SIL Open Font License fonts: **Amiri Bold & Regular** (Arabic), **Noto Nastaliq Urdu** (Urdu), and **Noto Sans Devanagari** (Hindi).
+- **🌍 5-Language System with Fallback**:
+  - **English (`en`)**, **Hinglish / Roman Urdu & Hindi (`en-IN`)**, **हिन्दी (`hi`)**, **اردو (`ur`)**, and **العربية (`ar`)**.
+- **💎 Apple-Inspired Liquid Glass UI Suite**:
+  - Frosted glass cards, sliding pill indicators, specular highlights, and motion tokens.
 
 ---
 

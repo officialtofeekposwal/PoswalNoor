@@ -4,10 +4,14 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.poswal.noor.data.local.dao.ContentDao
 import com.poswal.noor.data.local.entity.ContentItemEntity
+import com.poswal.noor.data.local.entity.SurahEntity
 
 @Database(
-    entities = [ContentItemEntity::class],
-    version = 2,
+    entities = [
+        ContentItemEntity::class,
+        SurahEntity::class
+    ],
+    version = 3,
     exportSchema = false
 )
 abstract class NoorDatabase : RoomDatabase() {

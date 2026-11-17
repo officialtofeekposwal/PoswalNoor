@@ -18,7 +18,7 @@ class AppLanguageTest {
         translationUr = "یقیناً تنگی کے ساتھ آسانی ہے۔",
         reference = "Surah Ash-Sharh 94:6",
         book = "quran",
-        number = 6088,
+        number = "6088",
         grade = "Mutawatir",
         topic = "sabr",
         wordCount = 4
@@ -33,7 +33,7 @@ class AppLanguageTest {
         translationUr = null,
         reference = "Sahih al-Bukhari 10",
         book = "bukhari",
-        number = 10,
+        number = "10",
         grade = "Sahih",
         topic = "akhlaq",
         wordCount = 8

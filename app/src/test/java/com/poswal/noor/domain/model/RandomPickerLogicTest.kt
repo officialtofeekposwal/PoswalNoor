@@ -15,7 +15,7 @@ class RandomPickerLogicTest {
             translationEn = "And say: My Lord, increase me in knowledge.",
             reference = "Surah Taha 20:114",
             book = "quran",
-            number = 2462,
+            number = "2462",
             grade = "Mutawatir",
             topic = "ilm",
             wordCount = 5
@@ -27,7 +27,7 @@ class RandomPickerLogicTest {
             translationEn = "Every good deed is charity.",
             reference = "Sahih al-Bukhari 6021",
             book = "bukhari",
-            number = 6021,
+            number = "6021",
             grade = "Sahih",
             topic = "charity",
             wordCount = 3
@@ -39,7 +39,7 @@ class RandomPickerLogicTest {
             translationEn = "Long translation text",
             reference = "Sahih al-Bukhari 999",
             book = "bukhari",
-            number = 999,
+            number = "999",
             grade = "Sahih",
             topic = "sabr",
             wordCount = 90

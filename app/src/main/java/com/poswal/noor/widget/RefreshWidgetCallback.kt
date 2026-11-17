@@ -35,10 +35,10 @@ class RefreshWidgetCallback : ActionCallback {
             ContentType.QURAN -> listOf("quran")
             ContentType.HADITH -> listOf("hadith")
         }
-        val item = entryPoint.contentRepository().getRandomWidgetContent(
+        val item = entryPoint.contentRepository().getNoRepeatItemForWidget(
             types = types,
             topics = prefs.selectedTopics.toList(),
-            maxWordCount = 40 // Strict word count filter for widget
+            maxWordCount = 60
         )
         if (item != null) {
             NoorGlanceWidget.updateItem(context, glanceId, item.id)

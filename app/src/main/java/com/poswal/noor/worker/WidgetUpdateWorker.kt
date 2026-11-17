@@ -32,10 +32,11 @@ class WidgetUpdateWorker @AssistedInject constructor(
                 ContentType.QURAN -> listOf("quran")
                 ContentType.HADITH -> listOf("hadith")
             }
-            val item = contentRepository.getRandomWidgetContent(
+            val epochDay = java.time.LocalDate.now().toEpochDay()
+            val item = contentRepository.getVerseOfTheDay(epochDay) ?: contentRepository.getNoRepeatItemForWidget(
                 types = types,
                 topics = prefs.selectedTopics.toList(),
-                maxWordCount = 40
+                maxWordCount = 60
             )
 
             if (item != null) {
