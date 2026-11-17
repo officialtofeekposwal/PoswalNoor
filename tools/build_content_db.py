@@ -242,16 +242,16 @@ def main():
     cur.execute("PRAGMA page_size = 4096;")
     cur.execute("PRAGMA encoding = 'UTF-8';")
 
-    # Table: surahs
+    # Table: surahs (matching Room NoorDatabase_Impl schema)
     cur.execute("""
-        CREATE TABLE surahs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            number INTEGER NOT NULL UNIQUE,
-            name_arabic TEXT NOT NULL,
-            name_english TEXT NOT NULL,
-            name_translation TEXT NOT NULL,
-            total_verses INTEGER NOT NULL,
-            revelation_type TEXT NOT NULL
+        CREATE TABLE IF NOT EXISTS `surahs` (
+            `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            `number` INTEGER NOT NULL,
+            `name_arabic` TEXT NOT NULL,
+            `name_english` TEXT NOT NULL,
+            `name_translation` TEXT NOT NULL,
+            `total_verses` INTEGER NOT NULL,
+            `revelation_type` TEXT NOT NULL
         );
     """)
 
@@ -261,28 +261,28 @@ def main():
             VALUES (?, ?, ?, ?, ?, ?)
         """, s)
 
-    # Table: content_items
+    # Table: content_items (matching Room NoorDatabase_Impl schema)
     cur.execute("""
-        CREATE TABLE content_items (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            type TEXT NOT NULL,
-            surah INTEGER,
-            ayah INTEGER,
-            surah_name TEXT,
-            arabic TEXT NOT NULL,
-            translation_en TEXT NOT NULL,
-            translation_hinglish TEXT,
-            translation_hi TEXT,
-            translation_ur TEXT,
-            reference TEXT NOT NULL,
-            book TEXT,
-            number TEXT,
-            grade TEXT,
-            narrator TEXT,
-            topic TEXT,
-            word_count INTEGER NOT NULL,
-            word_count_en INTEGER NOT NULL,
-            is_favorite INTEGER NOT NULL DEFAULT 0
+        CREATE TABLE IF NOT EXISTS `content_items` (
+            `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            `type` TEXT NOT NULL,
+            `surah` INTEGER,
+            `ayah` INTEGER,
+            `surah_name` TEXT,
+            `arabic` TEXT NOT NULL,
+            `translation_en` TEXT NOT NULL,
+            `translation_hinglish` TEXT,
+            `translation_hi` TEXT,
+            `translation_ur` TEXT,
+            `reference` TEXT NOT NULL,
+            `book` TEXT,
+            `number` TEXT,
+            `grade` TEXT,
+            `narrator` TEXT,
+            `topic` TEXT,
+            `word_count` INTEGER NOT NULL,
+            `word_count_en` INTEGER NOT NULL,
+            `is_favorite` INTEGER NOT NULL
         );
     """)
 
@@ -419,13 +419,18 @@ def main():
         ))
         hadith_inserted += 1
 
-    # Create Indexes for lightning fast queries
-    print("  Creating database indexes...")
-    cur.execute("CREATE INDEX idx_content_type ON content_items(type);")
-    cur.execute("CREATE INDEX idx_content_topic ON content_items(topic);")
-    cur.execute("CREATE INDEX idx_content_word_count_en ON content_items(word_count_en);")
-    cur.execute("CREATE INDEX idx_content_quran_surah_ayah ON content_items(surah, ayah);")
-    cur.execute("CREATE INDEX idx_content_hadith_book_num ON content_items(book, number);")
+    # Create Indexes matching Room's exact schema
+    print("  Creating database indexes matching Room specification...")
+    cur.execute("CREATE INDEX IF NOT EXISTS `index_content_items_type` ON `content_items` (`type`);")
+    cur.execute("CREATE INDEX IF NOT EXISTS `index_content_items_topic` ON `content_items` (`topic`);")
+    cur.execute("CREATE INDEX IF NOT EXISTS `index_content_items_word_count_en` ON `content_items` (`word_count_en`);")
+    cur.execute("CREATE INDEX IF NOT EXISTS `index_content_items_surah_ayah` ON `content_items` (`surah`, `ayah`);")
+    cur.execute("CREATE INDEX IF NOT EXISTS `index_content_items_book_number` ON `content_items` (`book`, `number`);")
+    cur.execute("CREATE UNIQUE INDEX IF NOT EXISTS `index_surahs_number` ON `surahs` (`number`);")
+
+    # Create room_master_table with exact Room identity hash
+    cur.execute("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY, identity_hash TEXT);")
+    cur.execute("INSERT OR REPLACE INTO room_master_table (id, identity_hash) VALUES(42, '2dc63e5b650dec4d08f2d855488531de');")
 
     conn.commit()
 

@@ -47,6 +47,23 @@ class ContentDatabaseIntegrityTest {
                 val rsEmpty = stmt.executeQuery("SELECT COUNT(*) FROM content_items WHERE TRIM(arabic) = ''")
                 assertTrue(rsEmpty.next())
                 assertEquals("No row should have empty Arabic text", 0, rsEmpty.getInt(1))
+
+                // Check Room Master Table and Identity Hash
+                val rsHash = stmt.executeQuery("SELECT identity_hash FROM room_master_table WHERE id = 42")
+                assertTrue("room_master_table with id=42 must exist", rsHash.next())
+                assertEquals("2dc63e5b650dec4d08f2d855488531de", rsHash.getString(1))
+
+                // Check Room Index Names
+                val rsIndices = stmt.executeQuery("PRAGMA index_list(content_items)")
+                val indexNames = mutableListOf<String>()
+                while (rsIndices.next()) {
+                    indexNames.add(rsIndices.getString("name"))
+                }
+                assertTrue("Must contain index_content_items_type", indexNames.contains("index_content_items_type"))
+                assertTrue("Must contain index_content_items_topic", indexNames.contains("index_content_items_topic"))
+                assertTrue("Must contain index_content_items_word_count_en", indexNames.contains("index_content_items_word_count_en"))
+                assertTrue("Must contain index_content_items_surah_ayah", indexNames.contains("index_content_items_surah_ayah"))
+                assertTrue("Must contain index_content_items_book_number", indexNames.contains("index_content_items_book_number"))
             }
         } catch (e: ClassNotFoundException) {
             println("org.sqlite.JDBC driver not available in test classpath, verified via dev script.")

@@ -18,6 +18,6 @@ abstract class NoorDatabase : RoomDatabase() {
     abstract fun contentDao(): ContentDao
 
     companion object {
-        const val DATABASE_NAME = "poswal_noor.db"
+        const val DATABASE_NAME = "poswal_content_v2.db"
     }
 }

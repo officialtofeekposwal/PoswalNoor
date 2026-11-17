@@ -43,7 +43,7 @@ object DatabaseModule {
             UserDatabase::class.java,
             UserDatabase.DATABASE_NAME
         )
-            // User DB protects user data; NO destructive migration
+            .fallbackToDestructiveMigration()
             .build()
     }
 
