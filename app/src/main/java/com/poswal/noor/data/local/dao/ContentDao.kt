@@ -19,6 +19,9 @@ interface ContentDao {
     @Query("SELECT * FROM content_items WHERE id = :id LIMIT 1")
     suspend fun getContentByIdSync(id: Long): ContentItemEntity?
 
+    @Query("SELECT * FROM content_items WHERE id IN (:ids)")
+    suspend fun getContentItemsByIds(ids: List<Long>): List<ContentItemEntity>
+
     @Query(
         """
         SELECT * FROM content_items 

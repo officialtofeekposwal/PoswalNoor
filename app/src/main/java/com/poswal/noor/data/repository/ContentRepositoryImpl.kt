@@ -6,15 +6,22 @@ import androidx.paging.PagingData
 import com.poswal.noor.data.local.dao.BookmarkDao
 import com.poswal.noor.data.local.dao.ContentDao
 import com.poswal.noor.data.local.dao.SeenDao
+import com.poswal.noor.data.local.dao.UserCollectionDao
 import com.poswal.noor.data.local.entity.BookmarkEntity
 import com.poswal.noor.data.local.entity.ContentItemEntity
 import com.poswal.noor.data.local.entity.SeenItemEntity
 import com.poswal.noor.data.local.entity.SurahEntity
+import com.poswal.noor.data.local.entity.UserCollectionEntity
 import com.poswal.noor.domain.model.ContentType
 import com.poswal.noor.domain.model.HadithBookInfo
+import com.poswal.noor.domain.model.SavedItem
 import com.poswal.noor.domain.repository.ContentRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
+import org.json.JSONArray
+import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,7 +29,8 @@ import javax.inject.Singleton
 class ContentRepositoryImpl @Inject constructor(
     private val contentDao: ContentDao,
     private val seenDao: SeenDao,
-    private val bookmarkDao: BookmarkDao
+    private val bookmarkDao: BookmarkDao,
+    private val userCollectionDao: UserCollectionDao
 ) : ContentRepository {
 
     override fun getContentById(id: Long): Flow<ContentItemEntity?> {
@@ -178,12 +186,133 @@ class ContentRepositoryImpl @Inject constructor(
         return bookmarkDao.getAllBookmarks()
     }
 
+    override fun getSavedItems(): Flow<List<SavedItem>> {
+        return bookmarkDao.getAllBookmarks().map { bookmarks ->
+            if (bookmarks.isEmpty()) {
+                emptyList()
+            } else {
+                val ids = bookmarks.map { it.contentId }
+                val contentList = contentDao.getContentItemsByIds(ids)
+                val contentMap = contentList.associateBy { it.id }
+                bookmarks.mapNotNull { b ->
+                    contentMap[b.contentId]?.let { c ->
+                        SavedItem(bookmark = b, content = c)
+                    }
+                }
+            }
+        }
+    }
+
     override suspend fun updateBookmarkNote(contentId: Long, note: String?) {
         bookmarkDao.updateNote(contentId, note)
     }
 
+    override suspend fun updateBookmarkFolder(contentId: Long, folder: String) {
+        bookmarkDao.updateFolder(contentId, folder.trim().ifBlank { "Default" })
+    }
+
     override fun getAllBookmarkFolders(): Flow<List<String>> {
         return bookmarkDao.getAllFolders()
+    }
+
+    override fun getUserCollectionNames(): Flow<List<String>> {
+        return userCollectionDao.getAllCollectionNames()
+    }
+
+    override suspend fun createUserCollection(name: String): Boolean {
+        val trimmed = name.trim()
+        if (trimmed.isBlank()) return false
+        val existing = userCollectionDao.getCollectionByName(trimmed)
+        if (existing != null) return false
+        userCollectionDao.insert(UserCollectionEntity(name = trimmed))
+        return true
+    }
+
+    override suspend fun deleteUserCollection(name: String) {
+        userCollectionDao.deleteByName(name)
+        val bookmarksInFolder = bookmarkDao.getBookmarksByFolder(name).firstOrNull() ?: emptyList()
+        bookmarksInFolder.forEach { b ->
+            bookmarkDao.updateFolder(b.contentId, "Default")
+        }
+    }
+
+    override suspend fun exportBookmarksJson(): String {
+        val bookmarks = bookmarkDao.getAllBookmarks().firstOrNull() ?: emptyList()
+        val customCollections = userCollectionDao.getAllCollectionNames().firstOrNull() ?: emptyList()
+
+        val root = JSONObject()
+        root.put("app", "Poswal Noor")
+        root.put("version", 1)
+        root.put("exported_at", System.currentTimeMillis())
+
+        val collectionsArray = JSONArray()
+        customCollections.forEach { collectionsArray.put(it) }
+        root.put("collections", collectionsArray)
+
+        val bookmarksArray = JSONArray()
+        bookmarks.forEach { b ->
+            val bObj = JSONObject()
+            bObj.put("content_id", b.contentId)
+            bObj.put("folder", b.folder)
+            if (b.note != null) bObj.put("note", b.note)
+            bObj.put("created_at", b.createdAt)
+            bookmarksArray.put(bObj)
+        }
+        root.put("bookmarks", bookmarksArray)
+
+        return root.toString(2)
+    }
+
+    override suspend fun importBookmarksJson(jsonString: String): Result<Pair<Int, Int>> {
+        return try {
+            val root = JSONObject(jsonString)
+            var collectionsImported = 0
+            var bookmarksImported = 0
+
+            // 1. Collections
+            if (root.has("collections")) {
+                val collectionsArray = root.getJSONArray("collections")
+                for (i in 0 until collectionsArray.length()) {
+                    val name = collectionsArray.getString(i).trim()
+                    if (name.isNotBlank()) {
+                        val inserted = createUserCollection(name)
+                        if (inserted) collectionsImported++
+                    }
+                }
+            }
+
+            // 2. Bookmarks
+            if (root.has("bookmarks")) {
+                val bookmarksArray = root.getJSONArray("bookmarks")
+                val toInsert = mutableListOf<BookmarkEntity>()
+                for (i in 0 until bookmarksArray.length()) {
+                    val bObj = bookmarksArray.getJSONObject(i)
+                    val contentId = bObj.optLong("content_id", -1L)
+                    if (contentId > 0) {
+                        val folder = bObj.optString("folder", "Default").ifBlank { "Default" }
+                        val note = if (bObj.has("note") && !bObj.isNull("note")) bObj.getString("note") else null
+                        val createdAt = bObj.optLong("created_at", System.currentTimeMillis())
+
+                        toInsert.add(
+                            BookmarkEntity(
+                                contentId = contentId,
+                                folder = folder,
+                                note = note,
+                                createdAt = createdAt
+                            )
+                        )
+                        bookmarksImported++
+                    }
+                }
+                if (toInsert.isNotEmpty()) {
+                    bookmarkDao.insertAll(toInsert)
+                }
+            }
+
+            Result.success(Pair(bookmarksImported, collectionsImported))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     // --- Full Quran & Hadith Browsing ---

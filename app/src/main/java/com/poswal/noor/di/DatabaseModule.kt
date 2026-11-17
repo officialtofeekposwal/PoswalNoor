@@ -7,6 +7,7 @@ import com.poswal.noor.data.local.UserDatabase
 import com.poswal.noor.data.local.dao.BookmarkDao
 import com.poswal.noor.data.local.dao.ContentDao
 import com.poswal.noor.data.local.dao.SeenDao
+import com.poswal.noor.data.local.dao.UserCollectionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,6 +44,7 @@ object DatabaseModule {
             UserDatabase::class.java,
             UserDatabase.DATABASE_NAME
         )
+            .addMigrations(UserDatabase.MIGRATION_1_2)
             .fallbackToDestructiveMigration()
             .build()
     }
@@ -60,5 +62,10 @@ object DatabaseModule {
     @Provides
     fun provideBookmarkDao(database: UserDatabase): BookmarkDao {
         return database.bookmarkDao()
+    }
+
+    @Provides
+    fun provideUserCollectionDao(database: UserDatabase): UserCollectionDao {
+        return database.userCollectionDao()
     }
 }

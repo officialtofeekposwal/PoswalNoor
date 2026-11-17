@@ -13,6 +13,9 @@ interface BookmarkDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(bookmark: BookmarkEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(bookmarks: List<BookmarkEntity>)
+
     @Query("DELETE FROM bookmarks WHERE content_id = :contentId")
     suspend fun deleteByContentId(contentId: Long)
 
@@ -25,8 +28,17 @@ interface BookmarkDao {
     @Query("SELECT * FROM bookmarks ORDER BY created_at DESC")
     fun getAllBookmarks(): Flow<List<BookmarkEntity>>
 
+    @Query("SELECT * FROM bookmarks WHERE folder = :folder ORDER BY created_at DESC")
+    fun getBookmarksByFolder(folder: String): Flow<List<BookmarkEntity>>
+
+    @Query("SELECT * FROM bookmarks WHERE content_id = :contentId LIMIT 1")
+    suspend fun getBookmarkByContentId(contentId: Long): BookmarkEntity?
+
     @Query("UPDATE bookmarks SET note = :note WHERE content_id = :contentId")
     suspend fun updateNote(contentId: Long, note: String?)
+
+    @Query("UPDATE bookmarks SET folder = :folder WHERE content_id = :contentId")
+    suspend fun updateFolder(contentId: Long, folder: String)
 
     @Query("SELECT DISTINCT folder FROM bookmarks")
     fun getAllFolders(): Flow<List<String>>

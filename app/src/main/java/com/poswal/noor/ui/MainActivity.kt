@@ -23,6 +23,7 @@ import com.poswal.noor.core.designsystem.components.NoorNavTab
 import com.poswal.noor.feature.hadith.HadithScreen
 import com.poswal.noor.feature.quran.QuranReaderScreen
 import com.poswal.noor.feature.quran.QuranScreen
+import com.poswal.noor.feature.saved.SavedScreen
 import com.poswal.noor.feature.showcase.DesignShowcaseScreen
 import com.poswal.noor.feature.today.TodayScreen
 import com.poswal.noor.ui.components.TabPlaceholderScreen
@@ -124,10 +125,14 @@ fun MainAppScaffold() {
                     )
                 }
                 NoorNavTab.SAVED -> {
-                    TabPlaceholderScreen(
-                        title = "Saved & Bookmarks",
-                        subtitle = "Phase 5: Custom collections, personal notes, offline search & SAF JSON backup.",
-                        onShowDesignShowcase = { showDesignShowcase = true }
+                    SavedScreen(
+                        onNavigateToSurahReader = { surah, ayah ->
+                            currentTab = NoorNavTab.QURAN
+                            activeReaderTarget = Pair(surah, ayah)
+                        },
+                        onNavigateToHadithDetail = { _ ->
+                            currentTab = NoorNavTab.HADITH
+                        }
                     )
                 }
                 NoorNavTab.MORE -> {

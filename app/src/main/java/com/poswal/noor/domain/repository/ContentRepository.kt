@@ -6,6 +6,7 @@ import com.poswal.noor.data.local.entity.ContentItemEntity
 import com.poswal.noor.data.local.entity.SurahEntity
 import com.poswal.noor.domain.model.ContentType
 import com.poswal.noor.domain.model.HadithBookInfo
+import com.poswal.noor.domain.model.SavedItem
 import kotlinx.coroutines.flow.Flow
 
 interface ContentRepository {
@@ -45,12 +46,19 @@ interface ContentRepository {
     fun getFavorites(): Flow<List<ContentItemEntity>>
     suspend fun toggleFavorite(id: Long, isFavorite: Boolean)
 
-    // --- Bookmarks (User DB) ---
+    // --- Bookmarks & User Collections (User DB) ---
     fun isBookmarked(contentId: Long): Flow<Boolean>
     suspend fun toggleBookmark(contentId: Long, folder: String = "Default", note: String? = null)
     fun getAllBookmarks(): Flow<List<BookmarkEntity>>
+    fun getSavedItems(): Flow<List<SavedItem>>
     suspend fun updateBookmarkNote(contentId: Long, note: String?)
+    suspend fun updateBookmarkFolder(contentId: Long, folder: String)
     fun getAllBookmarkFolders(): Flow<List<String>>
+    fun getUserCollectionNames(): Flow<List<String>>
+    suspend fun createUserCollection(name: String): Boolean
+    suspend fun deleteUserCollection(name: String)
+    suspend fun exportBookmarksJson(): String
+    suspend fun importBookmarksJson(jsonString: String): Result<Pair<Int, Int>>
 
     // --- Full Quran & Hadith Browsing ---
     fun getAllSurahs(): Flow<List<SurahEntity>>
