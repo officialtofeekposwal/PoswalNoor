@@ -24,7 +24,12 @@ val HindiFontFamily = FontFamily(
     Font(R.font.noto_sans_devanagari, FontWeight.Normal)
 )
 
-val UiFontFamily = FontFamily.Default
+val UiFontFamily = FontFamily(
+    Font(R.font.inter_variable, FontWeight.Normal),
+    Font(R.font.inter_variable, FontWeight.Medium),
+    Font(R.font.inter_variable, FontWeight.SemiBold),
+    Font(R.font.inter_variable, FontWeight.Bold)
+)
 
 // LineHeightStyle to prevent Tashkeel clipping in Arabic
 val NoClipLineHeightStyle = LineHeightStyle(

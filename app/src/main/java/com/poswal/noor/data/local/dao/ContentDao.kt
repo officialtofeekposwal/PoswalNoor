@@ -95,7 +95,7 @@ interface ContentDao {
         AND (:topicsCount = 0 OR topic IN (:topics))
         ORDER BY 
             CASE WHEN (:excludeCount > 0 AND id IN (:excludeIds)) THEN 1 ELSE 0 END ASC,
-            ((id * 1103515245 + :seed) & 2147483647) ASC
+            (((id * (((:seed * 1103515245 + 12345) & 2147483647) | 1)) + 12345) & 2147483647) ASC
         LIMIT :limit OFFSET :offset
         """
     )

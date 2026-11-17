@@ -37,3 +37,6 @@ data class ContentItemEntity(
     @ColumnInfo(name = "word_count_en") val wordCountEn: Int = wordCount,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean = false
 )
+
+val ContentItemEntity.isQuran: Boolean get() = type == "quran"
+val ContentItemEntity.isHadith: Boolean get() = type == "hadith"
