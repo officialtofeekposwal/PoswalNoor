@@ -64,6 +64,20 @@ class ContentDatabaseIntegrityTest {
                 assertTrue("Must contain index_content_items_word_count_en", indexNames.contains("index_content_items_word_count_en"))
                 assertTrue("Must contain index_content_items_surah_ayah", indexNames.contains("index_content_items_surah_ayah"))
                 assertTrue("Must contain index_content_items_book_number", indexNames.contains("index_content_items_book_number"))
+
+                // Verify Hinglish: 6,236 non-empty records, no Devanagari/Arabic/garbage characters
+                val rsHinglish = stmt.executeQuery("SELECT surah, ayah, translation_hinglish FROM content_items WHERE type='quran'")
+                var hinglishCount = 0
+                val devArabRegex = Regex("[\\u0900-\\u097F\\u0600-\\u06FF\\uFFFD]")
+                while (rsHinglish.next()) {
+                    val s = rsHinglish.getInt(1)
+                    val a = rsHinglish.getInt(2)
+                    val text = rsHinglish.getString(3)
+                    assertTrue("Ayah [$s:$a] Hinglish must not be null or blank", !text.isNullOrBlank())
+                    assertTrue("Ayah [$s:$a] Hinglish must not contain Devanagari/Arabic/garbage: $text", !devArabRegex.containsMatchIn(text))
+                    hinglishCount++
+                }
+                assertEquals("All 6,236 Quran Ayahs must have valid Hinglish", 6236, hinglishCount)
             }
         } catch (e: ClassNotFoundException) {
             println("org.sqlite.JDBC driver not available in test classpath, verified via dev script.")

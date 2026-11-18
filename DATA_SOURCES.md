@@ -12,7 +12,7 @@ All spiritual scripture and text within **Poswal Noor** are derived strictly fro
 | **English Translation** | **Sahih International** (Umm Muhammad, Aminah Assami, Maryam Kennedy) | Open / Permissive Distribution | [Tanzil.net](http://tanzil.net/trans/) |
 | **Hindi Translation** | **Dr. Suhel Farooq Khan & Prof. Farooq Khan** | Permissive Educational / Tanzil Project | [Tanzil.net](http://tanzil.net/trans/) |
 | **Urdu Translation** | **Maulana Muhammad Junagarhi** | Public Domain / Tanzil Project | [Tanzil.net](http://tanzil.net/trans/) |
-| **Hinglish (Roman Urdu / Hindi)** | 0% database coverage — currently defaults 100% to English fallback with UI badge | In Development | Poswal Noor Local Asset |
+| **Hinglish (Roman Urdu / Hindi)** | **Farooq Khan Hindi (Automatic Phonological Transliteration)** — 6,236 / 6,236 Ayahs (100% Quran coverage) | **UNVERIFIED DERIVATIVE (Automated Phonetic Transliteration)**<br>• Transliterated from Dr. Suhel Farooq Khan &amp; Prof. Farooq Khan Devanagari translation via `tools/transliterate_devanagari_to_hinglish.py`.<br>• Tanzil general translation terms state that modifications/alterations to translation texts are not permitted. Because this Romanized version is an automated script transliteration rather than an independently authored or certified translation, it is explicitly classified as an **Unverified Derivative** until formally reviewed.<br>• *Note:* Hadith records continue to use English fallback + badge. | Poswal Noor Local Asset (`translation_hinglish`) |
 
 ### 📌 Tanzil Project Terms of Use (Verbatim for About Screen)
 ```text

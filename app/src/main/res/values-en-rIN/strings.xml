@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Poswal Noor</string>
+    <string name="widget_name">Poswal Noor (Chhota 4x2)</string>
+    <string name="widget_name_4x3">Poswal Noor (Bada 4x3)</string>
+    <string name="widget_description">Daily Quran Ayah aur Sahih Hadith companion</string>
+    <string name="action_refresh">Refresh karein</string>
+    <string name="action_read_more">Aur padhein</string>
+    <string name="action_copy">Copy karein</string>
+    <string name="action_share">Share karein</string>
+    <string name="action_share_card">Card share karein</string>
+    <string name="action_favorite">Bookmark karein</string>
+    <string name="action_unfavorite">Bookmark hatayein</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_continue">Aage badhein</string>
+    <string name="action_add_widget_to_home">Home screen par widget lagayein</string>
+    <string name="action_add_widget_subtitle">Daily reflection direct apne phone screen par dekhein</string>
+
+    <string name="label_quran">Quran</string>
+    <string name="label_hadith">Hadith</string>
+    <string name="label_both">Dono</string>
+    <string name="label_filter">Topic se filter karein</string>
+    <string name="label_verse_of_the_day">Aaj ki reflection</string>
+    <string name="label_all_topics">Sabhi topics</string>
+
+    <string name="title_onboarding">Language chunein</string>
+    <string name="subtitle_onboarding">App aur translation ke liye apni pasandeeda zubaan chunein.</string>
+    <string name="title_settings">Settings</string>
+    <string name="setting_app_language">App ki language</string>
+    <string name="setting_content_type">Content type</string>
+    <string name="setting_topics">Topics filter</string>
+    <string name="setting_auto_refresh">Widget auto-refresh</string>
+    <string name="setting_font_size">Arabic font size</string>
+
+    <string name="interval_1h">Har 1 ghante mein</string>
+    <string name="interval_3h">Har 3 ghante mein</string>
+    <string name="interval_6h">Har 6 ghante mein</string>
+    <string name="interval_12h">Har 12 ghante mein</string>
+    <string name="interval_24h">Har 24 ghante mein</string>
+
+    <!-- Topics -->
+    <string name="topic_namaz">Namaz</string>
+    <string name="topic_sabr">Sabr</string>
+    <string name="topic_akhlaq">Akhlaq</string>
+    <string name="topic_parents">Maa-Baap</string>
+    <string name="topic_dua">Dua</string>
+    <string name="topic_akhirah">Aakhirat</string>
+    <string name="topic_ilm">Ilm</string>
+    <string name="topic_charity">Khairat</string>
+    <string name="topic_family">Khandaan</string>
+
+    <!-- Fallback badge & feedback -->
+    <string name="badge_english_fallback">English</string>
+    <string name="toast_copied">Clipboard par copy ho gaya</string>
+    <string name="share_footer">Poswal Noor — Islamic Companion</string>
+</resources>
