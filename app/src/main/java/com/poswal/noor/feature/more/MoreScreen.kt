@@ -34,6 +34,7 @@ import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.TouchApp
+import androidx.compose.material.icons.filled.Widgets
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -59,6 +60,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -75,6 +77,7 @@ import com.poswal.noor.domain.repository.ContentRepository
 import com.poswal.noor.feature.more.subscreens.DuaScreen
 import com.poswal.noor.feature.more.subscreens.HijriCalendarSheet
 import com.poswal.noor.feature.more.subscreens.TasbihScreen
+import com.poswal.noor.util.WidgetPinHelper
 
 enum class MoreSubscreen {
     NONE,
@@ -90,6 +93,7 @@ fun MoreScreen(
     viewModel: MoreViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val colors = NoorThemeTokens.colors
     val typography = NoorThemeTokens.typography
     val prefs by viewModel.userPreferences.collectAsState()
@@ -183,6 +187,13 @@ fun MoreScreen(
                                 title = "Offline Hijri Calendar",
                                 subtitle = "Algorithmic lunar dates & key Islamic occasions",
                                 onClick = { showHijriSheet = true }
+                            )
+
+                            UtilityNavigationCard(
+                                icon = Icons.Default.Widgets,
+                                title = "Add Home Screen Widget",
+                                subtitle = "Pin daily verse & digital tasbih to your phone launcher",
+                                onClick = { WidgetPinHelper.pinWidget(context) }
                             )
                         }
                     }
@@ -570,6 +581,7 @@ private fun UtilityNavigationCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val colors = NoorThemeTokens.colors
     val typography = NoorThemeTokens.typography
 
@@ -631,6 +643,7 @@ private fun SettingClickableRow(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val colors = NoorThemeTokens.colors
     val typography = NoorThemeTokens.typography
 
